@@ -1,0 +1,69 @@
+.header-home {
+  min-width: 320px;
+  min-height: 230px;
+  margin: 0;
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../images/header/bg-img-header-home-mobile.png');
+  background-color: var(--bg-color-header-fallback);
+
+  @media screen and (min-device-pixel-ratio: 2),
+         screen and (min-resolution: 192dpi),
+         screen and (min-resolution: 2dppx) {
+    
+    background-image: url('../images/header/bg-img-header-home-mobile@2x.png');    
+  };
+
+  @media screen and (min-device-pixel-ratio: 3),
+         screen and (min-resolution: 288dpi),
+         screen and (min-resolution: 3dppx) {
+    
+    background-image: url('../images/header/bg-img-header-home-mobile@3x.png');    
+  };
+
+  // TABLET
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    min-width: 768px;
+    min-height: 216px;
+
+    background-image: url('../images/header/bg-img-header-home-tablet.png');
+
+    @media screen and (min-device-pixel-ratio: 2),
+          screen and (min-resolution: 192dpi),
+          screen and (min-resolution: 2dppx) {
+      
+      background-image: url('../images/header/bg-img-header-home-tablet@2x.png');    
+    };
+
+    @media screen and (min-device-pixel-ratio: 3),
+          screen and (min-resolution: 288dpi),
+          screen and (min-resolution: 3dppx) {
+      
+      background-image: url('../images/header/bg-img-header-home-tablet@3x.png');    
+    };
+  };
+
+  // DESKTOP
+  @media screen and (min-width: 1280px) {
+    min-width: 1280px;
+    min-height: 216px;
+
+    background-image: url('../images/header/bg-img-header-home-desktop.png');
+
+    @media screen and (min-device-pixel-ratio: 2),
+          screen and (min-resolution: 192dpi),
+          screen and (min-resolution: 2dppx) {
+      
+      background-image: url('../images/header/bg-img-header-home-desktop@2x.png');    
+    };
+
+    @media screen and (min-device-pixel-ratio: 3),
+          screen and (min-resolution: 288dpi),
+          screen and (min-resolution: 3dppx) {
+      
+      background-image: url('../images/header/bg-img-header-home-desktop@3x.png');    
+    };
+  };
+};

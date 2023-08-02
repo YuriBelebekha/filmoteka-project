@@ -1,0 +1,14 @@
+@import './functions';
+
+@mixin font($fw, $fs, $lh, $ls) {  
+  font-weight: $fw;
+  font-size: $fs;
+  line-height: decimal-round(calc($lh / $fs), 2);
+  letter-spacing: $ls;
+};
+
+@mixin align($display, $jc, $ai) {
+  display: $display;
+  justify-content: $jc;
+  align-items: $ai;
+};

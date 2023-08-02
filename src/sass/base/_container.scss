@@ -1,0 +1,19 @@
+.container {
+  // ALL versions    
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  // TABLET version
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  };
+
+  // DESKTOP version
+  @media screen and (min-width: 1280px) {
+    width: 1280px;
+  };
+};

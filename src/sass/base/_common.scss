@@ -1,0 +1,14 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+body {
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--color-black);
+};
+
+section {
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 60px;
+};

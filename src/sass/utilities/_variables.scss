@@ -1,0 +1,14 @@
+:root {
+  --font-family-primary: 'Roboto', sans-serif;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey: #545454;
+  --color-accent-primary: #FF001B;
+  --color-accent-secondary: #FF6B08;
+  
+  --bg-color-header-fallback: rgba(0, 0, 0, 0.44);
+
+  --duration: 1250ms;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+};

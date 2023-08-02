@@ -1,2 +1,13 @@
-@import './common';
-@import './example';
+@import './utilities/variables';
+@import './utilities/functions';
+@import './utilities/mixins';
+
+@import './vendors/visually-hidden';
+
+@import './base/reset';
+@import './base/common';
+@import './base/container';
+
+@import './layout/header-home';
+
+@import './components/logo';
