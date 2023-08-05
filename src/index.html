@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
 
-    <!-- <link rel="icon" type="image/svg+xml" href="./images/icons/favicon.svg" /> -->
     <link rel="icon" type="image/png" href="./images/icons/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +13,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./sass/index.scss" />
-
-    <script type="module" src="./index.js"></script>
   </head>
   <body>
     <include src="./partials/headerHome.html"></include>
 
-    <main></main>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
+    <main>
+      <include src="./partials/galleryTrendingMovies.html"></include>
+    </main>
+
+    <script type="module" src="./js/index.js"></script>
   </body>
 </html>
