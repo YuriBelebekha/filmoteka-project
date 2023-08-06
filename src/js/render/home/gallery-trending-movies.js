@@ -1,7 +1,6 @@
 import {
   fetchGetTrending,
   fetchGenreMovieList,
-  // fetchGetMovieDetails,
   baseApiUrlForPoster,
   posterWidth,
   posterHeight,
@@ -9,6 +8,7 @@ import {
 } from '../../services/tmdb-api';
 import { refs } from '../../general/refs';
 
+// Fetching and rendering trending movies
 fetchGetTrending()
   .then(({results}) => {
     if (!results) {
@@ -27,9 +27,11 @@ function noGalleryTrendingMoviesMarkup() {
 
 function createGalleryTrendingMovies(data) {
   const markup = data.map(({ genre_ids, id, title, poster_path, release_date }) => {
-    let genreMovie = [];    
+    let genreMovie = [];
     genre_ids.map((genre) => { genreMovie.push(getGenreMovie(genre)) });
-    console.log(genreMovie);
+    let normalizedStringGenreMovie = genreMovie.join(', ');    
+    
+    let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     return `
       <li class="gallery-trending-movies__item">
@@ -43,7 +45,7 @@ function createGalleryTrendingMovies(data) {
         />
         <div class="gallery-trending-movies__description">
           <h2 class="gallery-trending-movies__title">${title}</h2>
-          <p></p>
+          <p>${normalizedStringGenreMovie} | ${releaseYear}</p>
         </div>
       </li>
     `
@@ -52,6 +54,7 @@ function createGalleryTrendingMovies(data) {
   refs.galleryTrendingMovies.insertAdjacentHTML('beforeend', markup);
 };
 
+// Fetching and converting genre id to genre name text
 fetchGenreMovieList()
   .then(({ genres }) => saveGenresListToLocalStorage(genres));
 
@@ -68,21 +71,3 @@ function getGenreMovie(genreId) {
     };
   };
 };
-
-// console.log(getGenreMovie(27));
-
-
-
-
-
-
-
-
-
-
-// fetchGetMovieDetails(5648)
-//   .then(({ genres }) => {
-//     console.log(genres ? genres.map(({ name }) => name).join(', ') : []);
-//     // return genres ? genres.map(({ name }) => name).join(', ') : [];    
-//   })
-//   .catch((error) => console.log(error));  
