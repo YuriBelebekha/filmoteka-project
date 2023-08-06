@@ -22,7 +22,7 @@ export const {
   'include_adult': false,
   'baseApiUrlForPoster': 'https://image.tmdb.org/t/p/w300/',
   'posterWidth': 280,
-  'posterHeight': 402,
+  'posterHeight': 420,
   'posterMissing': 'https://i.pinimg.com/564x/6f/8c/f1/6f8cf13bd79b8be7d50cced5552eb99f.jpg',
   'profilePhotoMissing': 'https://i.pinimg.com/564x/6d/88/40/6d8840c2c2a29dca141b53754787c944.jpg',
 };
@@ -86,5 +86,22 @@ export async function fetchGetMovieReviews(id) {
   const { data } = await axios.get(`
     ${BASE_URL}/${media_type}/${id}/reviews?api_key=${API_KEY}&language=${language}
   `);
+  return await data;
+};
+
+// The Movie Database API docs "get-genre-movie-list":
+// https://developer.themoviedb.org/reference/genre-movie-list
+
+const options = {
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDhjODYwNjc0N2IxYjU5MjJiYTEwOWNkODZjMjYzNyIsInN1YiI6IjY0MGNkMWU4ZTE4ZTNmMDdkMDUzY2U5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Q4Y9rol-68rzXEWhzawY0S5XJGrnpOI0c479Q6-bmps'
+  }
+};
+
+export async function fetchGenreMovieList() {
+  const { data } = await axios.get(`
+    ${BASE_URL}/genre/${media_type}/list?language=${language}
+  `, options);
   return await data;
 };
