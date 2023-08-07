@@ -44,8 +44,8 @@ function createGalleryTrendingMovies(data) {
           loading="lazy"
         />
         <div class="gallery-trending-movies__description">
-          <h2 class="gallery-trending-movies__title">${title}</h2>
-          <p>${normalizedStringGenreMovie} | ${releaseYear}</p>
+          <h2 class="gallery-trending-movies__name">${title}</h2>
+          <p class="gallery-trending-movies__genre">${normalizedStringGenreMovie} | ${releaseYear}</p>
         </div>
       </li>
     `
