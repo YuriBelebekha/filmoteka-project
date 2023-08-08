@@ -1,6 +1,7 @@
 .gallery-trending-movies {
   &__list {
-    @include align(flex, left, top);
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
 
