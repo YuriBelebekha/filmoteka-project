@@ -57,14 +57,21 @@
   };
 };
 
-.paginationjs-page,
-.paginationjs-ellipsis {
+.paginationjs-page {
   background-color: var(--color-white); 
   
   &:hover,
   &:focus {
     background-color: var(--color-accent-secondary);
     color: var(--color-white);
+  };
+};
+
+.paginationjs-ellipsis {
+  background-color: var(--color-white);
+
+  :hover {
+    cursor: not-allowed;
   };
 };
 
@@ -82,6 +89,7 @@
 .paginationjs-prev.disabled,
 .paginationjs-next.disabled {
   box-shadow: none;
+  cursor: not-allowed;
 };
 
 .paginationjs-go-input {
@@ -105,7 +113,7 @@
   padding: 6px 10px;
 
   border: 1px solid var(--color-light-grey);
-    border-radius: 5px;
+  border-radius: 5px;
 
   @media screen and (min-width: 768px) {
     width: 60px;
