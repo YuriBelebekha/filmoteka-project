@@ -30,9 +30,9 @@ export const {
 // The Movie Database API docs for "get-trending":
 // https://developers.themoviedb.org/3/trending/get-trending
 
-export async function fetchGetTrending() {
+export async function fetchGetTrending(page) {
   const { data } = await axios.get(`
-    ${BASE_URL}/trending/${media_type}/${time_window}?api_key=${API_KEY}
+    ${BASE_URL}/trending/${media_type}/${time_window}?api_key=${API_KEY}&page=${page || 1}
   `);
   return await data;
 };

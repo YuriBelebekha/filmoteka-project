@@ -1,0 +1,147 @@
+.paginationjs {
+  @include align(flex, center, center);  
+  flex-direction: column;  
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    margin-top: 60px;
+    margin-bottom: 0;
+  };
+};
+
+.paginationjs-pages ul {
+  display: flex;
+  list-style: none;
+};
+
+.paginationjs-pages ul li {
+  @include font(400, 10px, 12px, 0em);
+  @include align(flex, center, center);
+  width: 29px;
+  height: 29px;
+  margin-right: 2px;
+  
+  border: 1px solid transparent;
+  border-radius: 5px;  
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
+              0px 4px 4px rgba(0, 0, 0, 0.06),
+              1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  cursor: pointer;
+
+  transition: color            var(--duration) var(--timing-function),
+              box-shadow       var(--duration) var(--timing-function),
+              background-color var(--duration) var(--timing-function);
+
+  &:hover,
+  &:focus {
+    box-shadow: none;
+  };
+
+  @media screen and (min-width: 768px) {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+
+    @include font(500, 12px, 14px, 0em);
+  };
+};
+
+.paginationjs-pages ul li:last-child {
+  margin-right: 0;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 50px;
+  };
+};
+
+.paginationjs-page,
+.paginationjs-ellipsis {
+  background-color: var(--color-white); 
+  
+  &:hover,
+  &:focus {
+    background-color: var(--color-accent-secondary);
+    color: var(--color-white);
+  };
+};
+
+.paginationjs-page.active {
+  color: var(--color-white);
+  background-color: var(--color-accent-secondary);
+  box-shadow: none;
+};
+
+.paginationjs-prev,
+.paginationjs-next {
+  background-color: var(--color-light-grey);
+};
+
+.paginationjs-prev.disabled,
+.paginationjs-next.disabled {
+  box-shadow: none;
+};
+
+.paginationjs-go-input {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  
+  border-radius: 5px;  
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
+              0px 4px 4px rgba(0, 0, 0, 0.06),
+              1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  @media screen and (min-width: 768px) {    
+    margin-top: 0;
+    margin-bottom: 0;
+  };
+};
+
+.paginationjs-go-input input {
+  width: 90px;
+  height: 30px;
+  padding: 6px 10px;
+
+  border: 1px solid var(--color-light-grey);
+    border-radius: 5px;
+
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 40px;
+  };
+};
+
+.paginationjs-go-button input {
+  width: 40px;
+  height: 25px;
+
+  font-weight: 500;
+
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-light-grey);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
+              0px 4px 4px rgba(0, 0, 0, 0.06),
+              1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  transition: color var(--duration) var(--timing-function),
+              box-shadow var(--duration) var(--timing-function),
+              background-color var(--duration) var(--timing-function);
+
+  &:hover,
+  &:focus {
+    color: var(--color-white);
+    box-shadow: none;
+    background-color: var(--color-accent-secondary);
+  };
+
+  @media screen and (min-width: 768px) {
+    width: 40px;
+    height: 40px;    
+    margin-left: 10px;
+
+    border-radius: 5px;
+  };
+};
