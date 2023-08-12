@@ -1,0 +1,70 @@
+.footer {
+  @include align(flex, center, center);
+
+  background-color: var(--color-light-grey);
+
+  &__box {
+    @include align(flex, center, center);
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;    
+
+    @include font(400, 14px, 16px, 0em);
+    color: var(--color-grey);
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+
+      @include font(400, 16px, 19px, 0em);
+    };
+  };
+
+  &__copyright-text {
+    margin-bottom: 10px;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+      margin-right: 3px;
+    };
+  };
+
+  &__team {
+    display: flex;
+  };
+
+  &__team-text:not(:last-child) {
+    margin-right: 10px;
+  };
+
+  &__team-link {
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color var(--duration) var(--timing-function);
+
+    &:hover,
+    &:focus {
+      color: var(--color-accent-secondary);
+    };
+  };
+};
+
+.heartbeat {
+  color: var(--color-accent-secondary);
+  animation: heartbeat 3s infinite;
+  transform-origin: center;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    animation-play-state: paused;
+  };
+
+  @keyframes heartbeat {
+    0%   { transform: scale(1.0); };
+    20%  { transform: scale(1.5); };
+    40%  { transform: scale(1.3); };
+    60%  { transform: scale(1.5); };
+    80%  { transform: scale(1.0); };
+    100% { transform: scale(1.0); };
+  };
+};
