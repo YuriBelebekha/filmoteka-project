@@ -28,6 +28,7 @@
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     min-width: 768px;
     min-height: 216px;
+    @include font(500, 16px, 20px, 0.02em);
 
     background-image: url('../images/header/bg-img-header-home-tablet.png');
 
@@ -50,6 +51,7 @@
   @media screen and (min-width: 1280px) {
     min-width: 1280px;
     min-height: 216px;
+    @include font(500, 18px, 24px, 0.04em);
 
     background-image: url('../images/header/bg-img-header-home-desktop.png');
 
@@ -144,6 +146,13 @@
     
     outline: none;
 
+    transition: border var(--duration) var(--timing-function);
+
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid var(--color-accent-primary);
+    };
+
     &::placeholder {
       @include font(400, 14px, 16px, 0em);
       color: var(--color-white);
@@ -154,9 +163,17 @@
     position: absolute;
     right: 0;
     bottom: 1px;
+
+    cursor: pointer;    
   };
 
   &__icon {
     fill: var(--color-white);
+    transition: fill var(--duration) var(--timing-function);
+
+    &:hover,
+    &:focus {
+      fill: var(--color-accent-primary);
+    };
   };
 };
