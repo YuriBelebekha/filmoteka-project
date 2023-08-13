@@ -15,13 +15,16 @@
     <link rel="stylesheet" href="./sass/index.scss" />
   </head>
   <body>
-    <include src="./partials/headerHome.html"></include>
+    <div class="wrapper">
+      <include src="./partials/headerHome.html"></include>
 
-    <main>
-      <include src="./partials/galleryTrendingMovies.html"></include>
-    </main>
+      <main>
+        <include src="./partials/loader.html"></include>
+        <include src="./partials/galleryTrendingMovies.html"></include>
+      </main>
 
-    <include src="./partials/footer.html"></include>
+      <include src="./partials/footer.html"></include>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module" src="./js/index.js"></script>

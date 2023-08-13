@@ -29,13 +29,17 @@ $('[js-pagination-home-gallery]').pagination({
           return noGalleryTrendingMoviesMarkup();
         };
 
+        refs.loaderHomeBox.classList.remove('hidden');
         if (results) {
           clearGalleryTrendingMoviesMarkup();
           createGalleryTrendingMovies(results);
         };
       })
-      .catch(error => console.error(error));
-  }
+      .catch(error => console.error(error))
+      .finally(() => {
+        refs.loaderHomeBox.classList.add('hidden');
+      });
+  },
 });
 
 function getArrayPageNumbers() {
