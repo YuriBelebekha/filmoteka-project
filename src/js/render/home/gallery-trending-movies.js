@@ -9,7 +9,7 @@ import {
 import { refs } from '../../general/refs';
 import 'paginationjs';
 
-let numPages = 200;
+let numPages = 500;
 let arrayPageNumbers = [];
 let pageNumber = 0;
 
@@ -38,7 +38,7 @@ $('[js-pagination-home-gallery]').pagination({
       .catch(error => console.error(error))
       .finally(() => {
         refs.loaderHomeBox.classList.add('hidden');
-        window.scrollTo({ top: 200, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
   },
 });
