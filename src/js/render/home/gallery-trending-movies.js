@@ -32,7 +32,7 @@ $('[js-pagination-home-gallery]').pagination({
         refs.loaderHomeBox.classList.remove('hidden');
         if (results) {
           clearGalleryTrendingMoviesMarkup();
-          createGalleryTrendingMovies(results);          
+          createGalleryTrendingMovies(results);
         };
       })
       .catch(error => console.error(error))
