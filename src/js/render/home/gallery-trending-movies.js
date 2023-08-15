@@ -13,14 +13,14 @@ let numPages = 500;
 let arrayPageNumbers = [];
 let pageNumber = 0;
 
-$('[js-pagination-home-gallery]').pagination({
+$('[js-pagination-trending-movies]').pagination({
   dataSource: getArrayPageNumbers(),
   pageSize: 1,
   pageRange: 1,
   showGoInput: true,
   showGoButton: true,
 
-  callback: function (data, _pagination) {
+  callback: function (data, pagination) {
     pageNumber = data[0];
 
     fetchGetTrending(pageNumber)
@@ -52,11 +52,11 @@ function getArrayPageNumbers() {
 };
 
 function clearGalleryTrendingMoviesMarkup() {
-  refs.galleryTrendingMovies.innerHTML = '';
+  refs.galleryHome.innerHTML = '';
 };
 
 function noGalleryTrendingMoviesMarkup() {
-  refs.galleryTrendingMovies.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
+  refs.galleryHome.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
 };
 
 function createGalleryTrendingMovies(data) {
@@ -68,10 +68,10 @@ function createGalleryTrendingMovies(data) {
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     return `
-      <li class="gallery-trending-movies__item">
-        <div class="gallery-trending-movies__poster-box">
+      <li class="gallery-home__item">
+        <div class="gallery-home__poster-box">
           <img
-            class="gallery-trending-movies__poster"
+            class="gallery-home__poster"
             src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
             alt="${title}"
             width="${posterWidth}"
@@ -79,15 +79,15 @@ function createGalleryTrendingMovies(data) {
             loading="lazy"
           />
         </div>
-        <div class="gallery-trending-movies__description">
-          <h2 class="gallery-trending-movies__name">${title}</h2>
-          <p class="gallery-trending-movies__genre">${normalizedStringGenreMovie} | ${releaseYear}</p>
+        <div class="gallery-home__description">
+          <h2 class="gallery-home__name">${title}</h2>
+          <p class="gallery-home__genre">${normalizedStringGenreMovie} | ${releaseYear}</p>
         </div>
       </li>
     `
   }).join('');
 
-  refs.galleryTrendingMovies.insertAdjacentHTML('beforeend', markup);
+  refs.galleryHome.insertAdjacentHTML('beforeend', markup);
 };
 
 // Fetching and converting genre id to genre name text

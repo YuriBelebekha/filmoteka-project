@@ -19,10 +19,12 @@
       </ul>
     </nav>
 
-    <form class="search-form">
+    <form class="search-form" id="search-form">
       <input
         class="search-form__input"
         type="text"
+        name="searchQuery"
+        autocomplete="off"
         placeholder="Movie search"
       />
 
@@ -32,5 +34,7 @@
         </svg>
       </button>
     </form>
+
+    <div class="search-form__notification"></div>
   </div>
 </header>
