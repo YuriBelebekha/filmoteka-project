@@ -69,7 +69,10 @@ function getFoundMovies() {
 
               if (results.length === 0) {
                 inputFormNotification(wrongQuery);
-                return clearPaginationSearchMovies();
+                clearGalleryHome();
+                clearPaginationTrendingMovies();
+                clearPaginationSearchMovies();
+                return;
               };
               
               if (results) {
@@ -89,7 +92,6 @@ function getFoundMovies() {
     .catch(error => {
       console.error(error);
       inputFormNotification(error);
-      clearPaginationSearchMovies();
     });  
 };
 
