@@ -31,7 +31,7 @@ $('[js-pagination-trending-movies]').pagination({
 
         refs.loaderHomeBox.classList.remove('hidden');
         if (results) {
-          clearGalleryTrendingMoviesMarkup();
+          clearGalleryHome();
           createGalleryTrendingMovies(results);
         };
       })
@@ -51,7 +51,7 @@ function getArrayPageNumbers() {
   return arrayPageNumbers;
 };
 
-function clearGalleryTrendingMoviesMarkup() {
+function clearGalleryHome() {
   refs.galleryHome.innerHTML = '';
 };
 
@@ -81,7 +81,9 @@ function createGalleryTrendingMovies(data) {
         </div>
         <div class="gallery-home__description">
           <h2 class="gallery-home__name">${title}</h2>
-          <p class="gallery-home__genre">${normalizedStringGenreMovie} | ${releaseYear}</p>
+          <p class="gallery-home__genre">
+            ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+          </p>
         </div>
       </li>
     `

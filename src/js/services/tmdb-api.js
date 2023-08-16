@@ -40,7 +40,7 @@ export async function fetchGetTrending(page) {
 // The Movie Database API docs for "search-movies":
 // https://developers.themoviedb.org/3/search/search-movies
 
-export async function fetchSearchMovies(query) {
+export async function fetchSearchMovies(query, page) {
   const { data } = await axios.get(`
     ${BASE_URL}/search/${media_type}?api_key=${API_KEY}&language=${language}&page=${page}&include_adult=${include_adult}&query=${query}
   `);

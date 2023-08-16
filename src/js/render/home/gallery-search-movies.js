@@ -1,23 +1,29 @@
 import {
   fetchSearchMovies,
   fetchGenreMovieList,
+  baseApiUrlForPoster,
+  posterWidth,
+  posterHeight,
+  posterMissing,
 } from '../../services/tmdb-api';
 import { refs } from '../../general/refs';
 
-// console.log(fetchSearchMovies('transformers'));
-
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
-  clearNotificationBox: '',
+  wrongQuery: 'Nothing similar was found. Try to change your request, or choose something interesting from trending movies on home page.',
+  foundMovies: 'Yeah! We found movies :)',
 };
-const { emptySearchInput, clearNotification } = notifications;
+const {
+  emptySearchInput,
+  wrongQuery,
+  foundMovies,
+} = notifications;
 
 let normalizedSearchQuery = '';
 refs.searchFormBtn.addEventListener('submit', onSearchFormSubmit);
 
 function onSearchFormSubmit(e) {
   e.preventDefault();
-
   normalizedSearchQuery = e.currentTarget.searchQuery.value.trim();
    
   if (normalizedSearchQuery === '') {    
@@ -25,44 +31,16 @@ function onSearchFormSubmit(e) {
   };
 
   if (normalizedSearchQuery) {
+    e.currentTarget.searchQuery.value = '';
     getFoundMovies();
   };
-
-  
-  
-  // page = 1;
-  // limitReached = true;
-
-  // fetchPhotos(normalizedSearchQuery, page)
-  //   .then(({ hits, totalHits }) => {
-  //     if (totalHits === 0) {
-  //       clearPhotoGalleryMarkup();
-  //       return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-  //     };
-      
-  //     if (totalHits > 0) {
-  //       clearPhotoGalleryMarkup();
-  //       Notify.success(`Hooray! We found ${totalHits} images.`);
-  //       createMarkupForPhotoGallery(hits);
-  //       lightbox.refresh();
-        
-  //       if (totalHits > per_page) {
-  //         limitReached = false;
-  //         observer.observe(refs.guard); 
-  //       };        
-  //     };      
-  //   })    
-  //   .catch(error => console.error(error));      
 };
 
 function getFoundMovies() {
+  const page = 1;
 
-  fetchSearchMovies(normalizedSearchQuery)
-    .then(({ page, results, total_pages: totalPages, total_results: totalResults }) => {
-      // console.log('page: ', page);
-      // console.log('results: ', results);
-      // console.log('totalPages: ', totalPages);
-      // console.log('totalResults: ', totalResults);
+  fetchSearchMovies(normalizedSearchQuery, page)
+    .then(({ total_pages: totalPages }) => {
       let arrayPageNumbers = [];
 
       function getArrayPageNumbers() {
@@ -71,8 +49,6 @@ function getFoundMovies() {
         };
         return arrayPageNumbers;
       };
-
-      console.log(getArrayPageNumbers())
       
       $('[js-pagination-search-movies]').pagination({
         dataSource: getArrayPageNumbers(),
@@ -84,40 +60,54 @@ function getFoundMovies() {
         callback: function (data, _pagination) {
           pageNumber = data[0];
 
-          // Stopped here     
+          fetchSearchMovies(normalizedSearchQuery, pageNumber)
+            .then(({ results }) => {
+              if (!results) {
+                return;
+              };
 
-
-
-
-        },    
+              if (results.length === 0) {
+                inputFormNotification(wrongQuery);
+                return clearPaginationSearchMovies();
+              };
+              
+              if (results) {
+                clearGalleryHome();
+                clearPaginationTrendingMovies();
+                createGallerySearchingMovies(results);
+                return inputFormNotification(foundMovies);
+              };
+            })
+            .catch(error => console.error(error))
+            .finally(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        },
       });
-
-      // if (!results) {
-      //   // return noGalleryTrendingMoviesMarkup();
-      // };
-
-      // refs.loaderHomeBox.classList.remove('hidden');
-      // if (results) {
-        // clearGalleryTrendingMoviesMarkup();
-        // createGalleryTrendingMovies(results);
-      // };
     })
-    .catch(error => console.error(error))
-    .finally(() => {
-      // refs.loaderHomeBox.classList.add('hidden');
-      // window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-
-
-  
+    .catch(error => {
+      console.error(error);
+      inputFormNotification(error);
+    });  
 };
 
-function createGalleryTrendingMovies(data) {
-  const markup = data.map(({ genre_ids, title, poster_path, release_date }) => {
+function clearGalleryHome() {
+  refs.galleryHome.innerHTML = '';
+};
+
+function clearPaginationTrendingMovies() {
+  refs.paginationTrendingMovies.innerHTML = '';
+};
+
+function clearPaginationSearchMovies() {
+  refs.paginationSearchMovies.innerHTML = '';
+};
+
+function createGallerySearchingMovies(data) {
+  const markup = data.map(({ genre_ids, title, poster_path, release_date }) => {    
     let genreMovie = [];
     genre_ids.map((genre) => { genreMovie.push(getGenreMovie(genre)) });
-    let normalizedStringGenreMovie = genreMovie.join(', ');    
+    let normalizedStringGenreMovie = genreMovie.join(', ');
     
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
@@ -135,7 +125,9 @@ function createGalleryTrendingMovies(data) {
         </div>
         <div class="gallery-home__description">
           <h2 class="gallery-home__name">${title}</h2>
-          <p class="gallery-home__genre">${normalizedStringGenreMovie} | ${releaseYear}</p>
+          <p class="gallery-home__genre">
+            ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+          </p>
         </div>
       </li>
     `
@@ -143,14 +135,6 @@ function createGalleryTrendingMovies(data) {
 
   refs.galleryHome.insertAdjacentHTML('beforeend', markup);
 };
-
-// function getArrayPageNumbers() {
-//   for (let i = 1; i <= numPages; i += 1) {
-//     arrayPageNumbers.push(i);
-//   };
-
-//   return arrayPageNumbers;
-// };
 
 function inputFormNotification(notification) {
   refs.searchFormNotification.innerHTML = `<p>${notification}</p>`;
