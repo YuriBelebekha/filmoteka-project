@@ -60,7 +60,7 @@ function getFoundMovies() {
         callback: function (data, _pagination) {
           pageNumber = data[0];
 
-          fetchSearchMovies(normalizedSearchQuery, pageNumber)
+          fetchSearchMovies(normalizedSearchQuery, pageNumber || 1)
             .then(({ results }) => {
               if (!results) {
                 return;
