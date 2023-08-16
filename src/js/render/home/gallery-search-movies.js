@@ -38,6 +38,7 @@ function onSearchFormSubmit(e) {
 
 function getFoundMovies() {
   const page = 1;
+  let pageNumber = 0;
 
   fetchSearchMovies(normalizedSearchQuery, page)
     .then(({ total_pages: totalPages }) => {
@@ -60,7 +61,7 @@ function getFoundMovies() {
         callback: function (data, _pagination) {
           pageNumber = data[0];
 
-          fetchSearchMovies(normalizedSearchQuery, pageNumber || 1)
+          fetchSearchMovies(normalizedSearchQuery, pageNumber)
             .then(({ results }) => {
               if (!results) {
                 return;
@@ -88,6 +89,7 @@ function getFoundMovies() {
     .catch(error => {
       console.error(error);
       inputFormNotification(error);
+      clearPaginationSearchMovies();
     });  
 };
 
