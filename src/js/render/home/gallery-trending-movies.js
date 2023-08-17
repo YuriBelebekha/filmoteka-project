@@ -60,7 +60,7 @@ function noGalleryTrendingMoviesMarkup() {
 };
 
 function createGalleryTrendingMovies(data) {
-  const markup = data.map(({ genre_ids, title, poster_path, release_date }) => {
+  const markup = data.map(({ id, genre_ids, title, poster_path, release_date }) => {
     let genreMovie = [];
     genre_ids.map((genre) => { genreMovie.push(getGenreMovie(genre)) });
     let normalizedStringGenreMovie = genreMovie.join(', ');    
@@ -68,7 +68,7 @@ function createGalleryTrendingMovies(data) {
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     return `
-      <li class="gallery-home__item">
+      <li class="gallery-home__item" data-movie-id="${id}">
         <div class="gallery-home__poster-box">
           <img
             class="gallery-home__poster"

@@ -20,7 +20,7 @@ export const {
   'language': 'en-US',
   'page': 1,
   'include_adult': false,
-  'baseApiUrlForPoster': 'https://image.tmdb.org/t/p/w500/',
+  'baseApiUrlForPoster': 'https://image.tmdb.org/t/p/w500',
   'posterWidth': 280,
   'posterHeight': 420,
   'posterMissing': 'https://i.pinimg.com/564x/6f/8c/f1/6f8cf13bd79b8be7d50cced5552eb99f.jpg',

@@ -5,10 +5,23 @@ body {
   height: 100%;
 };
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+
+  @media screen and (min-width: 1200px) {
+    scroll-padding-top: 216px;
+  };  
+};
+
 .wrapper {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+};
+
+.no-scroll {
+  overflow: hidden;
 };
 
 main {
