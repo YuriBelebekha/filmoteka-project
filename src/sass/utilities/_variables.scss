@@ -1,17 +1,19 @@
 :root {
   --font-family-primary: 'Roboto', sans-serif;
+  
+  --bg-color-header-fallback: rgba(0, 0, 0, 0.44);
+  --bg-color-backdrop: rgba(0, 0, 0, 0.6);
+  
+  --border-color-card: #EEEEEE;
 
   --color-black: #000000;
   --color-white: #FFFFFF;
   --color-grey: #545454;
   --color-light-grey: #F7F7F7;
   --color-accent-primary: #FF001B;
-  --color-accent-secondary: #FF6B08;
-  
-  --bg-color-header-fallback: rgba(0, 0, 0, 0.44);
-  --bg-color-backdrop: rgba(0, 0, 0, 0.6);
+  --color-accent-secondary: #FF6B08;  
 
-  --border-color-card: #EEEEEE;
+  --font-color-grey: #8C8C8C;
 
   --duration: 250ms;
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);

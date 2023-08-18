@@ -1,0 +1,104 @@
+.movie-card {
+  &__poster-box {
+    margin-bottom: 20px;
+  };
+  
+  &__poster {
+    background-color: var(--color-grey);
+    border-radius: 5px;
+  };
+
+  &__name {
+    margin-bottom: 20px;
+
+    @include font(500, 20px, 23px, 0em);
+    text-transform: uppercase;    
+  };
+  
+  &__info-item {
+    display: flex;
+    margin-bottom: 20px;
+
+    line-height: 16px;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    };
+  };
+
+  &__info-name {
+    width: 45%;
+    
+    color: var(--font-color-grey);
+  };
+
+  &__info-value {
+    width: 55%;
+  };
+
+  &__vote {
+    padding: 1px 10px;
+
+    border-radius: 5px;
+    background-color: var(--color-accent-secondary);
+
+    color: var(--color-white);
+  };
+
+  &__vote-count {
+    padding: 1px 10px;
+    
+    border-radius: 5px;
+    background-color: var(--color-light-grey);
+  };
+
+  &__review-box {
+    margin-bottom: 20px;
+  };
+
+  &__review-title {
+    margin-bottom: 8px;
+    line-height: 16px;
+    text-transform: uppercase;
+  };
+
+  &__review-text {
+    line-height: 20px;
+  };
+
+  &__btn-box {
+    display: flex;
+    justify-content: space-between;    
+  };
+
+  &__btn-watched,
+  &__btn-queue {
+    width: 110px;
+    
+    @include font(500, 12px, 16px, 0em);
+    text-transform: uppercase;
+    
+    border: 1px solid var(--color-black);
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background var(--duration) var(--timing-function),
+                color            var(--duration) var(--timing-function),
+                border           var(--duration) var(--timing-function);
+    
+    &:hover,
+    &:focus {
+      background-color: var(--color-accent-secondary);
+      color: var(--color-white);
+      border: none;
+    };
+  };
+
+  &__btn-watched {
+    padding: 6px 27px;    
+  };
+
+  &__btn-queue {
+    padding: 14px 13px;
+  };
+};

@@ -22,7 +22,8 @@ refs.galleryHome.addEventListener('click', function (e) {
         };
         
         if (data) {
-          createMovieCard(data);
+          clearModalContainer();
+          return createMovieCard(data);
         };
       })
       .catch(error => console.error(error));      
@@ -30,8 +31,6 @@ refs.galleryHome.addEventListener('click', function (e) {
 });
 
 function createMovieCard(data) {
-  // console.log(data);
-
   const {
     original_title,
     overview,
@@ -64,42 +63,59 @@ function createMovieCard(data) {
     movieVoteCount,
   } = movieCardDetails;
   
-  console.log(movieOriginalTitle);
-  console.log(movieOverview);
-  console.log(movieGenres);
-  console.log(moviePopularity);
-  console.log(movieFullPosterPath);
-  console.log(movieTitle);
-  console.log(movieVoteAverage);
-  console.log(movieVoteCount);
+  const markup = `
+      <div class="movie-card">
+        <div class="movie-card__poster-box">
+          <img
+            class="movie-card__poster"
+            src="${movieFullPosterPath}"
+            alt="${movieTitle}"
+            width="${posterWidth}"
+            height="${posterHeight}"
+            loading="lazy"
+          />
+        </div>
 
-  
-  
-  // const markup = data.map(({ id, genre_ids, title, poster_path }) => { 
+        <div class="movie-card__description">
+          <h2 class="movie-card__name">${movieTitle}</h2>
+          
+          <ul class="movie-card__info-list list">
+            <li class="movie-card__info-item">
+              <div class="movie-card__info-name">Vote / Votes</div>  
+              <div class="movie-card__info-value">
+                <span class="movie-card__vote">${movieVoteAverage}</span> /
+                <span class="movie-card__vote-count">${movieVoteCount}</span>
+              </div>
+            </li>
+            <li class="movie-card__info-item">
+              <div class="movie-card__info-name">Popularity</div>
+              <div class="movie-card__info-value">${moviePopularity}</div>
+            </li>
+            <li class="movie-card__info-item">
+              <div class="movie-card__info-name">Original Title</div>
+              <div class="movie-card__info-value">${movieOriginalTitle}</div>
+            </li>
+            <li class="movie-card__info-item">
+              <div class="movie-card__info-name">Genre</div>
+              <div class="movie-card__info-value">${movieGenres}</div>
+            </li>
+          </ul>
 
-  //   return `
-  //     <li class="gallery-home__item" data-movie-id="${id}">
-  //       <div class="gallery-home__poster-box">
-  //         <img
-  //           class="gallery-home__poster"
-  //           src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-  //           alt="${title}"
-  //           width="${posterWidth}"
-  //           height="${posterHeight}"
-  //           loading="lazy"
-  //         />
-  //       </div>
-  //       <div class="gallery-home__description">
-  //         <h2 class="gallery-home__name">${title}</h2>
-  //         <p class="gallery-home__genre">
-  //           ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-  //         </p>
-  //       </div>
-  //     </li>
-  //   `
-  // }).join('');
+          <div class="movie-card__review-box">
+            <p class="movie-card__review-title">About</p>
+            <p class="movie-card__review-text">${movieOverview}</p>
+          </div>
 
-  // refs.modal.insertAdjacentHTML('beforeend', markup);
+          <div class="movie-card__btn-box">
+            <button class="movie-card__btn-watched">Add to Watched</button>
+            <button class="movie-card__btn-queue">Add to queue</button>
+          </div>
+        </div>
+      </div>
+    `
+  ; 
+
+  refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));
 };
 
 function getMovieGenres(data) {
@@ -111,3 +127,23 @@ function getMovieGenres(data) {
 function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterMissingData) {
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
 };
+
+function clearModalContainer() {
+  refs.modalContainer.forEach(item => item.innerHTML = '');
+};
+
+{/* <div class="movie-card__info-box">
+  <ul class="movie-card__info-name-box list">
+    <li class="movie-card__info-name">Vote / Votes</li>
+    <li class="movie-card__info-name">Popularity</li>
+    <li class="movie-card__info-name">Original Title</li>
+    <li class="movie-card__info-name">Genre</li>
+  </ul>
+
+  <ul class="movie-card__info-value-box list">
+    <li class="movie-card__info-value">${movieVoteAverage} / ${movieVoteCount}</li>
+    <li class="movie-card__info-value">${moviePopularity}</li>
+    <li class="movie-card__info-value">${movieOriginalTitle}</li>
+    <li class="movie-card__info-value">${movieGenres}</li>
+  </ul>
+</div> */}
