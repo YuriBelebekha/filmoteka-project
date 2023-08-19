@@ -1,18 +1,55 @@
-.movie-card {
+.movie-card {  
+  @media screen and (min-width: 768px) {
+    display: flex;
+  };  
+
+  &__description {
+    @media screen and (min-width: 768px) {
+      width: 264px;
+    }; 
+
+    @media screen and (min-width: 1280px) {
+      width: 390px;
+    }; 
+  };
+
   &__poster-box {
     margin-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+      margin-right: 68px;
+    };
+
+    @media screen and (min-width: 1280px) {
+      margin-bottom: 0;
+      margin-right: 16px;
+    };
   };
   
   &__poster {
     background-color: var(--color-grey);
     border-radius: 5px;
+
+    @media screen and (min-width: 768px) {
+      width: 264px;
+    };
+
+    @media screen and (min-width: 1280px) {
+      width: 375px;
+    };
   };
 
   &__name {
     margin-bottom: 20px;
 
     @include font(500, 20px, 23px, 0em);
-    text-transform: uppercase;    
+    text-transform: uppercase;  
+    
+    @media screen and (min-width: 1280px) {
+      font-size: 30px;
+      line-height: 35px;
+    };
   };
   
   &__info-item {
@@ -29,7 +66,7 @@
   &__info-name {
     width: 45%;
     
-    color: var(--font-color-grey);
+    color: var(--font-color-grey);    
   };
 
   &__info-value {
@@ -68,7 +105,11 @@
 
   &__btn-box {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
+
+    @media screen and (min-width: 1280px) {
+      justify-content: flex-start;      
+    };
   };
 
   &__btn-watched,
@@ -82,7 +123,7 @@
     border-radius: 5px;
 
     cursor: pointer;
-    transition: background var(--duration) var(--timing-function),
+    transition: background-color var(--duration) var(--timing-function),
                 color            var(--duration) var(--timing-function),
                 border           var(--duration) var(--timing-function);
     
@@ -92,13 +133,33 @@
       color: var(--color-white);
       border: none;
     };
+
+    @media screen and (min-width: 768px) {
+      width: 125px;
+    };
+
+    @media screen and (min-width: 1280px) {
+      width: 136px;
+    };
   };
 
   &__btn-watched {
-    padding: 6px 27px;    
+    padding: 6px 27px;
+
+    @media screen and (min-width: 768px) {
+      padding: 13px 9px;
+    };
+
+    @media screen and (min-width: 1280px) {
+      margin-right: 15px;
+    };
   };
 
   &__btn-queue {
     padding: 14px 13px;
+
+    @media screen and (min-width: 768px) {
+      padding: 13px 20px;
+    };
   };
 };
