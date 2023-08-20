@@ -19,7 +19,7 @@ document.addEventListener('click', function (e) {
 
     refs.body.forEach(target => target.classList.add('no-scroll'));
     modalContainer.classList.add('is-open');
-    refs.modal.classList.remove('is-hidden');    
+    refs.modal.classList.remove('is-hidden');
     return;
   };
 }, { passive: true });
@@ -34,4 +34,6 @@ function closeModal() {
   refs.body.forEach(target => target.classList.remove('no-scroll'));
   refs.modalContainer.forEach(item => { item.classList.remove('is-open') });
   refs.modal.classList.add('is-hidden');
+  refs.modalContainer.forEach(item => item.innerHTML = '');
+  refs.playBtn.classList.add('is-hidden');
 };

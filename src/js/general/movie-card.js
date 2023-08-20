@@ -16,17 +16,17 @@ refs.galleryHome.addEventListener('click', function (e) {
     movieId = Number(clickedElement.dataset.movieId);
 
     fetchGetMovieDetails(movieId)
-      .then((data) => {
-        if (!data) {
+      .then((data) => {        
+        if (!data) {          
           return noGalleryTrendingMoviesMarkup();
-        };
+        };        
         
         if (data) {
-          clearModalContainer();
+          refs.playBtn.classList.remove('is-hidden');
           return createMovieCard(data);
-        };
+        };        
       })
-      .catch(error => console.error(error));      
+      .catch(error => console.error(error));
   };
 });
 
@@ -127,23 +127,3 @@ function getMovieGenres(data) {
 function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterMissingData) {
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
 };
-
-function clearModalContainer() {
-  refs.modalContainer.forEach(item => item.innerHTML = '');
-};
-
-{/* <div class="movie-card__info-box">
-  <ul class="movie-card__info-name-box list">
-    <li class="movie-card__info-name">Vote / Votes</li>
-    <li class="movie-card__info-name">Popularity</li>
-    <li class="movie-card__info-name">Original Title</li>
-    <li class="movie-card__info-name">Genre</li>
-  </ul>
-
-  <ul class="movie-card__info-value-box list">
-    <li class="movie-card__info-value">${movieVoteAverage} / ${movieVoteCount}</li>
-    <li class="movie-card__info-value">${moviePopularity}</li>
-    <li class="movie-card__info-value">${movieOriginalTitle}</li>
-    <li class="movie-card__info-value">${movieGenres}</li>
-  </ul>
-</div> */}

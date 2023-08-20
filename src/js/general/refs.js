@@ -13,4 +13,5 @@ export const refs = {
   backdrop:       document.querySelector('.backdrop'),
   modalContainer: document.querySelectorAll('[data-modal-open-target]'),
   body:           document.querySelectorAll('body'),
+  playBtn:        document.querySelector('.play-trailer'),
 };
