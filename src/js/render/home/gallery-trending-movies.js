@@ -20,7 +20,7 @@ $('[js-pagination-trending-movies]').pagination({
   showGoInput: true,
   showGoButton: true,
 
-  callback: function (data, pagination) {
+  callback: function (data, _pagination) {
     pageNumber = data[0];
 
     fetchGetTrending(pageNumber)

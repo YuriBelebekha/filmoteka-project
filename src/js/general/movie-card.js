@@ -11,8 +11,8 @@ let movieId = 0;
 
 refs.galleryHome.addEventListener('click', function (e) {
   const clickedElement = e.target.closest('[data-movie-id]');
-  
-  if (clickedElement) {
+
+  if (clickedElement !== null) {
     movieId = Number(clickedElement.dataset.movieId);
 
     fetchGetMovieDetails(movieId)

@@ -10,9 +10,16 @@ refs.backdrop.addEventListener('click', (e) => {
   };
 }, { passive: true });
 
-document.addEventListener('click', function (e) {
-  const clickedElement = e.target.closest('[data-modal-open-path]');
+refs.galleryHome.addEventListener('click', function (e) {
   
+  const galleryHomeClassName = refs.galleryHome.className;
+  const emptyArea = e.target.className === galleryHomeClassName;
+  const clickedElement = e.target.closest('[data-modal-open-path]');
+
+  if (emptyArea) {
+    return;
+  };
+
   if (clickedElement) {
     let target = clickedElement.dataset.modalOpenPath;
     let modalContainer = document.querySelector(`[data-modal-open-target="${target}"]`);
