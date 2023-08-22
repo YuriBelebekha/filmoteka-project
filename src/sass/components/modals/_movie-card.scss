@@ -115,6 +115,8 @@
   &__btn-watched,
   &__btn-queue {
     width: 110px;
+    min-height: 44px;
+    padding: 5px;
     
     @include font(500, 12px, 16px, 0em);
     text-transform: uppercase;
@@ -144,22 +146,8 @@
   };
 
   &__btn-watched {
-    padding: 6px 27px;
-
-    @media screen and (min-width: 768px) {
-      padding: 13px 9px;
-    };
-
     @media screen and (min-width: 1280px) {
       margin-right: 15px;
-    };
-  };
-
-  &__btn-queue {
-    padding: 13px;
-
-    @media screen and (min-width: 768px) {
-      padding: 13px 20px;
     };
   };
 };
