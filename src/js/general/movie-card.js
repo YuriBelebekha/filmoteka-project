@@ -26,12 +26,13 @@ refs.galleryHome.addEventListener('click', function (e) {
           return createMovieCard(data);
         };        
       })
-      .catch(error => console.error(error));
+      .catch(error => console.log(error));
   };
 });
 
 function createMovieCard(data) {
   const {
+    id,
     original_title,
     overview,
     genres,
@@ -43,6 +44,7 @@ function createMovieCard(data) {
   } = data;
 
   const movieCardDetails = {
+    movieId: id,
     movieOriginalTitle: original_title,
     movieOverview: overview,
     movieGenres: getMovieGenres(genres),
@@ -53,6 +55,7 @@ function createMovieCard(data) {
     movieVoteCount: vote_count,
   };
   const {
+    movieId,
     movieOriginalTitle,
     movieOverview,
     movieGenres,
@@ -64,10 +67,10 @@ function createMovieCard(data) {
   } = movieCardDetails;
   
   const markup = `
-      <div class="movie-card">
+      <div class="movie-card" data-movie-id="${movieId}">
         <div class="movie-card__poster-box">
           <img
-            class="movie-card__poster"
+            class="movie-card__poster"            
             src="${movieFullPosterPath}"
             alt="${movieTitle}"
             width="${posterWidth}"

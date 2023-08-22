@@ -8,10 +8,10 @@ export const refs = {
   searchFormNotification:    document.querySelector('.search-form__notification'),
 
   // MODALS
-  modal:          document.querySelector('[data-modal]'),
-  closeModalBtn:  document.querySelector('[data-modal-close]'),
-  backdrop:       document.querySelector('.backdrop'),
-  modalContainer: document.querySelectorAll('[data-modal-open-target]'),
-  body:           document.querySelectorAll('body'),
-  playBtn:        document.querySelector('.play-trailer'),
+  modal:           document.querySelector('[data-modal]'),
+  closeModalBtn:   document.querySelector('[data-modal-close]'),
+  backdrop:        document.querySelector('.backdrop'),
+  modalContainer:  document.querySelectorAll('[data-modal-open-target]'),
+  body:            document.querySelectorAll('body'),
+  playBtn:         document.querySelector('.play-trailer'),
 };

@@ -10,8 +10,7 @@ refs.backdrop.addEventListener('click', (e) => {
   };
 }, { passive: true });
 
-refs.galleryHome.addEventListener('click', function (e) {
-  
+refs.galleryHome.addEventListener('click', function (e) {  
   const galleryHomeClassName = refs.galleryHome.className;
   const emptyArea = e.target.className === galleryHomeClassName;
   const clickedElement = e.target.closest('[data-modal-open-path]');

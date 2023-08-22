@@ -1,5 +1,6 @@
 import './general/refs';
 import './general/modal';
+import './general/modal-trailer';
 import './general/movie-card';
 
 import './services/tmdb-api';
