@@ -16,29 +16,24 @@ function getMovieTrailer() {
   if (movieId) {
     fetchGetMovieVideos(movieId)
       .then(({ results }) => {        
-        if (results.length === 0) {
-          // console.log(results); /////////// delete
+        if (results.length === 0) {          
           return noMovieTrailer();
         };
 
-        if (results) {
-          // window.scrollTo({ bottom: 0, behavior: 'smooth' });
+        if (results) {          
+          refs.playBtn.classList.add('is-hidden');
           return createMovieTrailerBox(results);
-        };        
+        };
       })
       .catch((error) => { console.log(error) });
   };
 };
 
 function createMovieTrailerBox(results) { 
-  // console.table(results); ////////////////////// delete
-  
+  // console.table(results); ////////////////////// delete  
+
   const markup = results.map(({ name, key, type }) => {    
-    const normalizedType = type.toLowerCase().trim();
-    console.log(name, key, type)
-    
-    // Розібратись чому не підтягує всі відео з Type === 'Trailer'!!!!!!!!!!!!!!!!!!!!!!
-    // Спробувати створити новий масив з доданими за Type === 'Trailer' даними і вже з нього рендерити трейлери з назвами
+    const normalizedType = type.toLowerCase().trim();    
     
     if (normalizedType === 'trailer') {
       return `        
@@ -57,10 +52,10 @@ function createMovieTrailerBox(results) {
     };  
   }).join('');
 
-  refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));
+  refs.modalContainer.forEach(item => item.insertAdjacentHTML('afterbegin', markup));
 };
 
 function noMovieTrailer() {  
   const markup = `<p class="movie-trailer__message">Unfortunately, we don't have any trailer</p>`;
-  refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));
+  refs.modalContainer.forEach(item => item.insertAdjacentHTML('afterbegin', markup));
 };

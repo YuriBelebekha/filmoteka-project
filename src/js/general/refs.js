@@ -14,4 +14,5 @@ export const refs = {
   modalContainer:  document.querySelectorAll('[data-modal-open-target]'),
   body:            document.querySelectorAll('body'),
   playBtn:         document.querySelector('.play-trailer'),
+  movieTrailer:    document.getElementsByClassName('#movie-trailer'),
 };
