@@ -5,7 +5,6 @@ import { refs } from './refs';
 
 refs.playBtn.addEventListener('click', getMovieTrailer);
 
-
 function getMovieTrailer() {
   const movieId = Number(refs.modalContainer[0].childNodes[1].dataset.movieId);  
   
@@ -16,7 +15,8 @@ function getMovieTrailer() {
   if (movieId) {
     fetchGetMovieVideos(movieId)
       .then(({ results }) => {        
-        if (results.length === 0) {          
+        if (results.length === 0) {
+          refs.playBtn.classList.add('is-hidden');        
           return noMovieTrailer();
         };
 
@@ -29,28 +29,25 @@ function getMovieTrailer() {
   };
 };
 
-function createMovieTrailerBox(results) { 
-  // console.table(results); ////////////////////// delete  
-
-  const markup = results.map(({ name, key, type }) => {    
-    const normalizedType = type.toLowerCase().trim();    
-    
-    if (normalizedType === 'trailer') {
+function createMovieTrailerBox(results) {   
+  const markup = results
+    .filter(({ type }) => type.toLowerCase().trim() === 'trailer')
+    .map(({ name, key }) => {
       return `        
         <div class="movie-trailer">
-          <p class="movie-trailer__name">${name}</p>
-          
+          <p class="movie-trailer__name">${name}</p>          
           <iframe
             width="240"
             src="https://www.youtube-nocookie.com/embed/${key}?enablejsapi=1&modestbranding=1"
             title="${name}"
             frameborder="0"
             allowfullscreen
+          >
           </iframe>
         </div>
       `
-    };  
-  }).join('');
+    })
+    .join('');
 
   refs.modalContainer.forEach(item => item.insertAdjacentHTML('afterbegin', markup));
 };
