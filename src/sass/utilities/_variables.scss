@@ -11,7 +11,16 @@
   --color-grey: #545454;
   --color-light-grey: #F7F7F7;
   --color-accent-primary: #FF001B;
-  --color-accent-secondary: #FF6B08;  
+  --color-accent-secondary: #FF6B08; 
+  
+  --bg-color-theme-light: #EEEEEE;
+  --bg-color-theme-dark: #545454;
+  --bg-color-theme-accent-dark: linear-gradient(
+    180deg, 
+    rgba(84, 84, 84, 1) 1%,
+    rgba(255, 0, 27, 1) 50%,
+    rgba(84, 84, 84, 1) 99%
+  );
 
   --font-color-grey: #8C8C8C;
 
