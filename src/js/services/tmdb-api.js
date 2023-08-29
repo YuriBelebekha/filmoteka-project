@@ -67,6 +67,23 @@ export async function fetchGetMovieVideos(id) {
   return await data;
 };
 
+// The Movie Database API docs "get-genre-movie-list":
+// https://developer.themoviedb.org/reference/genre-movie-list
+
+const options = {
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDhjODYwNjc0N2IxYjU5MjJiYTEwOWNkODZjMjYzNyIsInN1YiI6IjY0MGNkMWU4ZTE4ZTNmMDdkMDUzY2U5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Q4Y9rol-68rzXEWhzawY0S5XJGrnpOI0c479Q6-bmps'
+  }
+};
+
+export async function fetchGenreMovieList() {
+  const { data } = await axios.get(`
+    ${BASE_URL}/genre/${media_type}/list?language=${language}
+  `, options);
+  return await data;
+};
+
 // ADDITIONAL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // The Movie Database API docs for "get-movie-credits":
@@ -86,22 +103,5 @@ export async function fetchGetMovieReviews(id) {
   const { data } = await axios.get(`
     ${BASE_URL}/${media_type}/${id}/reviews?api_key=${API_KEY}&language=${language}
   `);
-  return await data;
-};
-
-// The Movie Database API docs "get-genre-movie-list":
-// https://developer.themoviedb.org/reference/genre-movie-list
-
-const options = {
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDhjODYwNjc0N2IxYjU5MjJiYTEwOWNkODZjMjYzNyIsInN1YiI6IjY0MGNkMWU4ZTE4ZTNmMDdkMDUzY2U5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Q4Y9rol-68rzXEWhzawY0S5XJGrnpOI0c479Q6-bmps'
-  }
-};
-
-export async function fetchGenreMovieList() {
-  const { data } = await axios.get(`
-    ${BASE_URL}/genre/${media_type}/list?language=${language}
-  `, options);
   return await data;
 };
