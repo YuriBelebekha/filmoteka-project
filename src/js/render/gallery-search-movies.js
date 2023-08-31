@@ -5,8 +5,8 @@ import {
   posterWidth,
   posterHeight,
   posterMissing,
-} from '../../services/tmdb-api';
-import { refs } from '../../general/refs';
+} from '../services/tmdb-api';
+import { refs } from '../general/refs';
 
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
@@ -69,14 +69,14 @@ function getFoundMovies() {
 
               if (results.length === 0) {
                 inputFormNotification(wrongQuery);
-                clearGalleryHome();
+                clearGalleryHomeList();
                 clearPaginationTrendingMovies();
                 clearPaginationSearchMovies();
                 return;
               };
               
               if (results) {
-                clearGalleryHome();
+                clearGalleryHomeList();
                 clearPaginationTrendingMovies();
                 createGallerySearchingMovies(results);
                 return inputFormNotification(foundMovies);
@@ -95,8 +95,8 @@ function getFoundMovies() {
     });  
 };
 
-function clearGalleryHome() {
-  refs.galleryHome.innerHTML = '';
+function clearGalleryHomeList() {
+  refs.galleryHomeList.innerHTML = '';
 };
 
 function clearPaginationTrendingMovies() {
@@ -137,7 +137,7 @@ function createGallerySearchingMovies(data) {
     `
   }).join('');
 
-  refs.galleryHome.insertAdjacentHTML('beforeend', markup);
+  refs.galleryHomeList.insertAdjacentHTML('beforeend', markup);
 };
 
 function inputFormNotification(notification) {

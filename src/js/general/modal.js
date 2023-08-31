@@ -10,9 +10,9 @@ refs.backdrop.addEventListener('click', (e) => {
   };
 }, { passive: true });
 
-refs.galleryHome.addEventListener('click', function (e) {  
-  const galleryHomeClassName = refs.galleryHome.className;
-  const emptyArea = e.target.className === galleryHomeClassName;
+refs.galleryHomeList.addEventListener('click', function (e) {  
+  const galleryHomeListClassName = refs.galleryHomeList.className;
+  const emptyArea = e.target.className === galleryHomeListClassName;
   const clickedElement = e.target.closest('[data-modal-open-path]');
 
   if (emptyArea) {

@@ -5,8 +5,8 @@ import {
   posterWidth,
   posterHeight,
   posterMissing,
-} from '../../services/tmdb-api';
-import { refs } from '../../general/refs';
+} from '../services/tmdb-api';
+import { refs } from '../general/refs';
 import 'paginationjs';
 
 let numPages = 500;
@@ -31,7 +31,7 @@ $('[js-pagination-trending-movies]').pagination({
 
         refs.loaderHomeBox.classList.remove('hidden');
         if (results) {
-          clearGalleryHome();
+          clearGalleryHomeList();
           createGalleryTrendingMovies(results);
         };
       })
@@ -51,12 +51,12 @@ function getArrayPageNumbers() {
   return arrayPageNumbers;
 };
 
-function clearGalleryHome() {
-  refs.galleryHome.innerHTML = '';
+function clearGalleryHomeList() {
+  refs.galleryHomeList.innerHTML = '';
 };
 
 function noGalleryTrendingMoviesMarkup() {
-  refs.galleryHome.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
+  refs.galleryHomeList.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
 };
 
 function createGalleryTrendingMovies(data) {
@@ -89,7 +89,7 @@ function createGalleryTrendingMovies(data) {
     `
   }).join('');
 
-  refs.galleryHome.insertAdjacentHTML('beforeend', markup);
+  refs.galleryHomeList.insertAdjacentHTML('beforeend', markup);
 };
 
 // Fetching and converting genre id to genre name text

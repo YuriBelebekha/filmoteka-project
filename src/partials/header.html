@@ -1,5 +1,5 @@
-<header class="header-home">
-  <div class="container header-home__container">
+<header class="header">
+  <div class="container">
     <nav class="menu-nav">
       <a class="logo link" href="./index.html">
         <svg class="logo__icon" width="24" height="24">
@@ -10,11 +10,18 @@
 
       <ul class="menu-nav__list list">
         <li class="menu-nav__item">
-          <a class="menu-nav__link link current" href="./index.html">home</a>
+          <a
+            class="menu-nav__link link current"
+            id="home-page-link"
+            href="./index.html"
+            >home</a
+          >
         </li>
 
         <li class="menu-nav__item">
-          <a class="menu-nav__link link" href="./library.html">my library</a>
+          <a class="menu-nav__link link" id="library-page-link" href="#">
+            my library
+          </a>
         </li>
       </ul>
     </nav>
@@ -36,5 +43,16 @@
     </form>
 
     <div class="search-form__notification"></div>
+
+    <ul class="library-btn-list list visually-hidden">
+      <li class="library-btn-list__item">
+        <button class="library-btn-list__btn active" type="button">
+          Queue
+        </button>
+      </li>
+      <li class="library-btn-list__item">
+        <button class="library-btn-list__btn" type="button">Watched</button>
+      </li>
+    </ul>
   </div>
 </header>

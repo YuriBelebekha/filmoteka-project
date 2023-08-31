@@ -1,4 +1,3 @@
-// const radios = document.getElementsByName('theme');
 import { refs } from './refs';
 
 Array.from(refs.radiosThemeSwitcher).forEach( (elem, _i) => {		

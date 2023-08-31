@@ -8,10 +8,13 @@
 @import './base/common';
 @import './base/container';
 
-@import './layout/header-home';
+@import './layout/header';
 @import './layout/gallery-home';
 @import './layout/footer';
 
+@import './components/menu-nav';
+@import './components/search-form';
+@import './components/library-btn-list';
 @import './components/theme-switcher';
 @import './components/logo';
 @import './components/pagination';

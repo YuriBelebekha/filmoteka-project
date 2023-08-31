@@ -9,7 +9,7 @@ import { refs } from './refs';
 
 let movieId = 0;
 
-refs.galleryHome.addEventListener('click', function (e) {
+refs.galleryHomeList.addEventListener('click', function (e) {
   const clickedElement = e.target.closest('[data-movie-id]');
 
   if (clickedElement !== null) {

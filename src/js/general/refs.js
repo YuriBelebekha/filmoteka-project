@@ -1,6 +1,7 @@
 export const refs = {
   // HOME PAGE
-  galleryHome:               document.querySelector('.gallery-home__list'),
+  galleryHome:               document.querySelector('.gallery-home'),
+  galleryHomeList:           document.querySelector('.gallery-home__list'),
   loaderHomeBox:             document.querySelector('.loader-box'),
   paginationTrendingMovies:  document.querySelector('.pagination-trending-movies'),
   paginationSearchMovies:    document.querySelector('.pagination-search-movies'),
@@ -14,8 +15,13 @@ export const refs = {
   modalContainer:  document.querySelectorAll('[data-modal-open-target]'),
   body:            document.querySelectorAll('body'),
   playBtn:         document.querySelector('.play-trailer'),
-  movieTrailer: document.getElementsByClassName('#movie-trailer'),
+  movieTrailer:    document.getElementsByClassName('#movie-trailer'),
   
   // THEME SWITCHER
   radiosThemeSwitcher: document.getElementsByName('theme'),
+
+  // HEADER LIBRARY
+  libraryBtnList:  document.querySelector('.library-btn-list'),
+  libraryPageLink: document.querySelector('#library-page-link'),
+  homePageLink:    document.querySelector('#home-page-link'),
 };

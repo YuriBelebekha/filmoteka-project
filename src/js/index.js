@@ -6,5 +6,6 @@ import './general/theme-switcher';
 
 import './services/tmdb-api';
 
-import './render/home/gallery-trending-movies';
-import './render/home/gallery-search-movies';
+import './render/gallery-trending-movies';
+import './render/gallery-search-movies';
+import './render/header-library';

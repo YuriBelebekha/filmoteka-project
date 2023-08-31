@@ -1,0 +1,42 @@
+.library-btn-list {
+  display: flex;
+  justify-content: center;  
+
+  &__item {
+    min-width: 130px;
+    text-align: center;
+  };
+
+  &__item:first-child {
+    margin-right: 16px;
+  };
+
+  &__btn {    
+    width: 100%;
+    padding: 13px;
+    @include font(500, 12px, 16px, 0em);
+    color: var(--color-white);
+    text-transform: uppercase;
+    cursor: pointer;
+
+    border: 1px solid var(--color-white);
+    border-radius: 5px;
+
+    transition: background-color var(--duration) var(--timing-function),
+                border           var(--duration) var(--timing-function),
+                box-shadow       var(--duration) var(--timing-function);
+                
+    &:hover,
+    &:focus {
+      background-color: var(--color-accent-secondary);
+      border: 1px solid transparent;
+      box-shadow: 0px 8px 43px 0px rgba(255, 107, 1, 0.6);
+    };
+
+    &.active {
+      background-color: var(--color-accent-secondary);
+      border: 1px solid transparent;
+      box-shadow: 0px 8px 43px 0px rgba(255, 107, 1, 0.6);
+    };
+  };
+};
