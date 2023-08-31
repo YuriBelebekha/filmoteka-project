@@ -1,7 +1,5 @@
 import { refs } from '../general/refs';
 
-
-
 refs.libraryPageLink.addEventListener('click', clickLibraryPage);
 
 function clickLibraryPage() {
@@ -9,5 +7,6 @@ function clickLibraryPage() {
   refs.homePageLink.classList.remove('current');
   refs.libraryPageLink.classList.add('current');
   refs.searchFormBtn.classList.add('visually-hidden');
-  refs.galleryHome.classList.add('visually-hidden');
+  refs.searchFormNotification.classList.add('visually-hidden');
+  refs.galleryHome.forEach(item => item.classList.add('visually-hidden'));
 };

@@ -1,6 +1,6 @@
 export const refs = {
   // HOME PAGE
-  galleryHome:               document.querySelector('.gallery-home'),
+  galleryHome:               document.querySelectorAll('.gallery-home'),
   galleryHomeList:           document.querySelector('.gallery-home__list'),
   loaderHomeBox:             document.querySelector('.loader-box'),
   paginationTrendingMovies:  document.querySelector('.pagination-trending-movies'),
