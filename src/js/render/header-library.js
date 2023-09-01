@@ -9,4 +9,5 @@ function clickLibraryPage() {
   refs.searchFormBtn.classList.add('visually-hidden');
   refs.searchFormNotification.classList.add('visually-hidden');
   refs.galleryHome.forEach(item => item.classList.add('visually-hidden'));
+  refs.header.classList.add('header-library');
 };

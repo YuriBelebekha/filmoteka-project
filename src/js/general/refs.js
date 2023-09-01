@@ -21,6 +21,7 @@ export const refs = {
   radiosThemeSwitcher: document.getElementsByName('theme'),
 
   // HEADER LIBRARY
+  header:          document.querySelector('.header'),
   libraryBtnList:  document.querySelector('.library-btn-list'),
   libraryPageLink: document.querySelector('#library-page-link'),
   homePageLink:    document.querySelector('#home-page-link'),
