@@ -3,6 +3,7 @@ import './general/modal';
 import './general/movie-trailer';
 import './general/movie-card';
 import './general/theme-switcher';
+import './general/auth-form';
 
 import './services/tmdb-api';
 

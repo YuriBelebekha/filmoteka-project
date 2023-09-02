@@ -1,0 +1,198 @@
+.form-wrapper {
+  overflow: hidden;
+  max-width: 280px;
+  padding: 20px;
+  margin: 60px auto;
+
+  background-color: var(--color-light-grey);
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
+              0px 4px 4px rgba(0, 0, 0, 0.06),
+              1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  & .form-container {
+    width: 100%;
+    overflow: hidden;
+  };
+};
+
+.form-title {
+  display: flex;
+  width: 200%;
+
+  &__name {
+    width: 50%;
+    @include font(500, 24px, 30px, 0.04em);
+    text-transform: uppercase;
+    text-align: center;
+    // transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  };
+};
+
+.slide-controls {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+  margin: 15px 0;
+  border: 1px solid var(--border-color-card);
+  border-radius: 5px;
+  overflow: hidden;
+
+  & .slide {
+    height: 100%;
+    width: 100%;
+    color: var(--color-white);
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.6s ease;
+  };
+
+  & .login,
+  & .signup {
+    color: var(--color-black);
+  };
+
+  & .slider-tab {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    left: 0;
+    z-index: 0;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(left, #FF001B, #FF6B08);
+    transition: all 1000ms var(--timing-function-form);
+  };
+};
+
+input[type="radio"] {
+  display: none;
+};
+
+#login {
+  color: var(--color-black);
+};
+
+#signup:checked ~ .slider-tab {
+  left: 50%;
+};
+
+#signup:checked ~ .signup,
+#login:checked ~ .login {
+  color: var(--color-white);
+  cursor: default;
+  user-select: none;
+};
+
+#signup:checked ~ .login,
+#login:checked  ~ .signup {
+  color: var(--color-black);
+};
+
+.form-inner {
+  display: flex;
+  width: 200%;
+
+  & form {
+    width: 50%;
+    transition: all 1500ms var(--timing-function-form);
+  };
+}; 
+
+.field {
+  height: 30px;
+  width: 100%;
+  margin-top: 15px;
+
+  &__input {
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 12px;
+
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid var(--border-color-card);
+    
+    outline: none;
+    transition: all 0.3s ease;
+  };
+
+  &__input:hover,
+  &__input:focus {
+    border-color: var(--color-accent-primary);
+  };
+
+  &__input::placeholder {
+    color: var(--color-grey);
+  };
+
+  &__input:focus::placeholder {
+    color: var(--color-accent-primary);
+  };
+};
+
+/////
+
+//  .form-inner form .pass-link {
+//    margin-top: 5px;
+//  }
+
+.form-inner form .signup-link {
+  margin-top: 30px;
+  text-align: center;
+};
+
+ .form-inner form .pass-link a,
+ .form-inner form .signup-link a {
+   color: #1a75ff;
+   text-decoration: none;
+ }
+
+ .form-inner form .pass-link a:hover,
+ .form-inner form .signup-link a:hover {
+   text-decoration: underline;
+ }
+
+ form .btn {
+   height: 30px;
+   width: 100%;
+   border-radius: 5px;
+   position: relative;
+   overflow: hidden;
+ }
+
+ form .btn .btn-layer {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+  //  left: -100%;
+   border: 1px solid var(--color-accent-primary);
+   border-radius: 5px;
+   transition: all 0.4s ease;   
+ }
+
+ form .btn:hover .btn-layer {
+  //  left: 0;
+    background-color: var(--color-accent-primary);
+ }
+
+ form .btn input[type="submit"] {
+   height: 100%;
+   width: 100%;
+   z-index: 1;
+   position: relative;
+   background: none;
+   border: none;
+   color: #fff;
+   padding-left: 0;
+   border-radius: 15px;
+   font-size: 18px;
+   font-weight: 500;
+   cursor: pointer;
+ }
