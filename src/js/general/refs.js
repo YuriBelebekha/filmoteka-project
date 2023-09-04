@@ -25,4 +25,12 @@ export const refs = {
   libraryBtnList:  document.querySelector('.library-btn-list'),
   libraryPageLink: document.querySelector('#library-page-link'),
   homePageLink:    document.querySelector('#home-page-link'),
+
+  // AUTH FORM
+  loginForm:   document.querySelector('form.login'),
+  loginBtn:    document.querySelector('label.login'),
+  signupBtn:   document.querySelector('label.signup'),
+  signupLink:  document.querySelector('.signup-link'),
+  // fieldBtn:    document.querySelector('.field__btn'),
+  formWrapper: document.querySelector('.form-wrapper'),
 };

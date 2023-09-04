@@ -25,7 +25,6 @@
     @include font(500, 24px, 30px, 0.04em);
     text-transform: uppercase;
     text-align: center;
-    // transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   };
 };
 
@@ -35,8 +34,8 @@
   justify-content: space-between;
   height: 30px;
   width: 100%;
-  margin: 15px 0;
-  border: 1px solid var(--border-color-card);
+  margin-bottom: 15px;
+  border: 1px solid var(--color-white);
   border-radius: 5px;
   overflow: hidden;
 
@@ -115,7 +114,7 @@ input[type="radio"] {
     padding: 5px 10px;
     font-size: 12px;
 
-    background-color: transparent;
+    background-color: var(--color-white);
     border-radius: 5px;
     border: 1px solid var(--border-color-card);
     
@@ -135,64 +134,41 @@ input[type="radio"] {
   &__input:focus::placeholder {
     color: var(--color-accent-primary);
   };
+
+  &__btn {
+    height: 30px;
+    width: 100%;
+    margin-top: 30px;
+
+    @include font(500, 18px, 24px, 0);
+    color: var(--color-accent-primary);
+
+    background-color: var(--color-white);
+    border: 1px solid var(--color-accent-primary);
+    border-radius: 5px;
+    
+    cursor: pointer;
+    transition: background-color var(--duration) var(--timing-function),
+                color            var(--duration) var(--timing-function);
+
+    &:hover {
+      background-color: var(--color-accent-primary);
+      color: var(--color-white);
+    };
+  };
 };
 
-/////
-
-//  .form-inner form .pass-link {
-//    margin-top: 5px;
-//  }
-
-.form-inner form .signup-link {
+.signup-link {
   margin-top: 30px;
-  text-align: center;
+  text-align: center;  
 };
 
- .form-inner form .pass-link a,
- .form-inner form .signup-link a {
-   color: #1a75ff;
-   text-decoration: none;
- }
+.signup-text {
+  color: var(--color-accent-primary);
+  text-decoration: none;
 
- .form-inner form .pass-link a:hover,
- .form-inner form .signup-link a:hover {
-   text-decoration: underline;
- }
-
- form .btn {
-   height: 30px;
-   width: 100%;
-   border-radius: 5px;
-   position: relative;
-   overflow: hidden;
- }
-
- form .btn .btn-layer {
-   position: absolute;
-   height: 100%;
-   width: 100%;
-  //  left: -100%;
-   border: 1px solid var(--color-accent-primary);
-   border-radius: 5px;
-   transition: all 0.4s ease;   
- }
-
- form .btn:hover .btn-layer {
-  //  left: 0;
-    background-color: var(--color-accent-primary);
- }
-
- form .btn input[type="submit"] {
-   height: 100%;
-   width: 100%;
-   z-index: 1;
-   position: relative;
-   background: none;
-   border: none;
-   color: #fff;
-   padding-left: 0;
-   border-radius: 15px;
-   font-size: 18px;
-   font-weight: 500;
-   cursor: pointer;
- }
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  };
+};

@@ -4,6 +4,7 @@ import './general/movie-trailer';
 import './general/movie-card';
 import './general/theme-switcher';
 import './general/auth-form';
+import './general/auth';
 
 import './services/tmdb-api';
 

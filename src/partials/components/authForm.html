@@ -1,9 +1,4 @@
-<div class="container form-wrapper">
-  <!-- <div class="form-title title-text">
-    <div class="form-title__name login">Login Form</div>
-    <div class="form-title__name signup">Signup Form</div>
-  </div> -->
-
+<div class="container form-wrapper visually-hidden">
   <div class="form-container">
     <div class="slide-controls">
       <input type="radio" name="slide" id="login" checked />
@@ -20,6 +15,7 @@
         <div class="field">
           <input
             class="field__input"
+            id="login-form-email"
             type="text"
             placeholder="Email Address"
             required
@@ -28,20 +24,19 @@
         <div class="field">
           <input
             class="field__input"
+            id="login-form-password"
             type="password"
             placeholder="Password"
+            autocomplete="off"
             required
           />
         </div>
 
-        <div class="field btn">
-          <div class="btn-layer"></div>
-          <input type="submit" value="Login" />
-        </div>
+        <button class="field__btn" type="submit">Login</button>
 
         <div class="signup-link">
           Not registered?
-          <a href="">Signup now</a>
+          <a class="signup-text" href="">Signup now</a>
         </div>
       </form>
 
@@ -49,6 +44,7 @@
         <div class="field">
           <input
             class="field__input"
+            id="signup-form-email"
             type="text"
             placeholder="Email Address"
             required
@@ -57,24 +53,25 @@
         <div class="field">
           <input
             class="field__input"
+            id="signup-form-password"
             type="password"
             placeholder="Password"
+            autocomplete="off"
             required
           />
         </div>
         <div class="field">
           <input
             class="field__input"
+            id="signup-form-password-confirm"
             type="password"
-            placeholder="Confirm password"
+            placeholder="Confirm Password"
+            autocomplete="off"
             required
           />
         </div>
 
-        <div class="field btn">
-          <div class="btn-layer"></div>
-          <input type="submit" value="Signup" />
-        </div>
+        <button class="field__btn" type="submit">Signup</button>
       </form>
     </div>
   </div>
