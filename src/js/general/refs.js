@@ -28,6 +28,7 @@ export const refs = {
 
   // AUTH FORM
   loginForm:   document.querySelector('form.login'),
+  signupForm:   document.querySelector('form.signup'),
   loginBtn:    document.querySelector('label.login'),
   signupBtn:   document.querySelector('label.signup'),
   signupLink:  document.querySelector('.signup-link'),
