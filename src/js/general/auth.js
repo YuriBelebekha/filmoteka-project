@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { refs } from './refs';
 
 refs.loginForm.addEventListener('submit', loginFormHandler);
@@ -10,8 +11,14 @@ function loginFormHandler(e) {
 
   authWithEmailAndPassword(loginFormEmail, loginFormPassword)
     .then(token => {
-      // console.log(token);
+      if (token) {
+        Notify.success(`Login successful. Email: ${loginFormEmail}`);
+      } else {
+        Notify.failure('Incorrect login or password');
+      };      
     });
+  
+  refs.loginInput.forEach(item => item.value = '');
 };
 
 function signupFormHandler(e) {
@@ -23,11 +30,16 @@ function signupFormHandler(e) {
   if (signupFormPassword === signupFormPasswordConfirm) {
     signupWithEmailAndPassword(signupFormEmail, signupFormPassword)
       .then(data => {
-        // console.log(data);
+        if (data) {
+          Notify.success(`Successful registration with email: ${signupFormEmail}`);          
+        } else {
+          Notify.failure('This email is already registered');
+        };
       });
+    refs.signupInput.forEach(item => item.value = '');
   } else {
-    console.log('Password and confirm password are not the same');
-  };  
+    Notify.failure('Password and confirm password are not the same');
+  };
 };
 
 export async function authWithEmailAndPassword(email, password) {

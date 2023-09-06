@@ -32,6 +32,7 @@ export const refs = {
   loginBtn:    document.querySelector('label.login'),
   signupBtn:   document.querySelector('label.signup'),
   signupLink:  document.querySelector('.signup-link'),
-  // fieldBtn:    document.querySelector('.field__btn'),
   formWrapper: document.querySelector('.form-wrapper'),
+  loginInput: document.querySelectorAll('.login input'),
+  signupInput: document.querySelectorAll('.signup input'),
 };
