@@ -28,11 +28,16 @@ export const refs = {
 
   // AUTH FORM
   loginForm:   document.querySelector('form.login'),
-  signupForm:   document.querySelector('form.signup'),
+  signupForm:  document.querySelector('form.signup'),
   loginBtn:    document.querySelector('label.login'),
   signupBtn:   document.querySelector('label.signup'),
   signupLink:  document.querySelector('.signup-link'),
   formWrapper: document.querySelector('.form-wrapper'),
-  loginInput: document.querySelectorAll('.login input'),
+  loginInput:  document.querySelectorAll('.login input'),
   signupInput: document.querySelectorAll('.signup input'),
+
+  // MOVIE CARD
+  queueBtn:    document.querySelector('.queue-btn'),
+  watchedBtn:  document.querySelector('.watched-btn'),
+  dataMovieId: document.querySelector('[data-movie-id]'),
 };

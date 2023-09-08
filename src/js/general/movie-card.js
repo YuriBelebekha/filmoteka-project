@@ -14,19 +14,22 @@ refs.galleryHomeList.addEventListener('click', function (e) {
 
   if (clickedElement !== null) {
     movieId = Number(clickedElement.dataset.movieId);
-
+    
     fetchGetMovieDetails(movieId)
-      .then((data) => {        
-        if (!data) {          
+      .then((data) => {
+        if (!data) {
           return noGalleryTrendingMoviesMarkup();
-        };        
+        };
         
         if (data) {
           refs.playBtn.classList.remove('is-hidden');
-          return createMovieCard(data);
+          return createMovieCard(data);          
         };        
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => {
+        addMovieIdToQueueList();
+      });
   };
 });
 
@@ -67,58 +70,60 @@ function createMovieCard(data) {
   } = movieCardDetails;
   
   const markup = `
-      <div class="movie-card" data-movie-id="${movieId}">
-        <div class="movie-card__poster-box">
-          <img
-            class="movie-card__poster"            
-            src="${movieFullPosterPath}"
-            alt="${movieTitle}"
-            width="${posterWidth}"
-            height="${posterHeight}"
-            loading="lazy"
-          />
+    <div class="movie-card" data-movie-id="${movieId}">
+      <div class="movie-card__poster-box">
+        <img
+          class="movie-card__poster"            
+          src="${movieFullPosterPath}"
+          alt="${movieTitle}"
+          width="${posterWidth}"
+          height="${posterHeight}"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="movie-card__description">
+        <h2 class="movie-card__name">${movieTitle}</h2>
+        
+        <ul class="movie-card__info-list list">
+          <li class="movie-card__info-item">
+            <div class="movie-card__info-name">Vote / Votes</div>  
+            <div class="movie-card__info-value">
+              <span class="movie-card__vote">${movieVoteAverage}</span> /
+              <span class="movie-card__vote-count">${movieVoteCount}</span>
+            </div>
+          </li>
+          <li class="movie-card__info-item">
+            <div class="movie-card__info-name">Popularity</div>
+            <div class="movie-card__info-value">${moviePopularity}</div>
+          </li>
+          <li class="movie-card__info-item">
+            <div class="movie-card__info-name">Original Title</div>
+            <div class="movie-card__info-value">${movieOriginalTitle}</div>
+          </li>
+          <li class="movie-card__info-item">
+            <div class="movie-card__info-name">Genre</div>
+            <div class="movie-card__info-value">${movieGenres}</div>
+          </li>
+        </ul>
+
+        <div class="movie-card__review-box">
+          <p class="movie-card__review-title">About</p>
+          <p class="movie-card__review-text">${movieOverview}</p>
         </div>
 
-        <div class="movie-card__description">
-          <h2 class="movie-card__name">${movieTitle}</h2>
-          
-          <ul class="movie-card__info-list list">
-            <li class="movie-card__info-item">
-              <div class="movie-card__info-name">Vote / Votes</div>  
-              <div class="movie-card__info-value">
-                <span class="movie-card__vote">${movieVoteAverage}</span> /
-                <span class="movie-card__vote-count">${movieVoteCount}</span>
-              </div>
-            </li>
-            <li class="movie-card__info-item">
-              <div class="movie-card__info-name">Popularity</div>
-              <div class="movie-card__info-value">${moviePopularity}</div>
-            </li>
-            <li class="movie-card__info-item">
-              <div class="movie-card__info-name">Original Title</div>
-              <div class="movie-card__info-value">${movieOriginalTitle}</div>
-            </li>
-            <li class="movie-card__info-item">
-              <div class="movie-card__info-name">Genre</div>
-              <div class="movie-card__info-value">${movieGenres}</div>
-            </li>
-          </ul>
-
-          <div class="movie-card__review-box">
-            <p class="movie-card__review-title">About</p>
-            <p class="movie-card__review-text">${movieOverview}</p>
-          </div>
-
-          <div class="movie-card__btn-box">
-            <button class="movie-card__btn-watched">Add to Watched</button>
-            <button class="movie-card__btn-queue">Add to queue</button>
-          </div>
+        <div class="movie-card__btn-box">
+          <button class="movie-card__btn-queue queue-btn" type="button">Add to queue</button>
+          <button class="movie-card__btn-watched watched-btn" type="button">Add to watched</button>
         </div>
       </div>
-    `
-  ; 
+    </div>
+  `;
 
   refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));
+  
+  
+  
 };
 
 function getMovieGenres(data) {
@@ -129,4 +134,14 @@ function getMovieGenres(data) {
 
 function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterMissingData) {
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
+};
+
+function addMovieIdToQueueList() {
+  const queueBtn = document.querySelector('.queue-btn');
+  const queueMovieIdList = [];
+
+  queueBtn.addEventListener('click', () => {
+    queueMovieIdList.push(movieId);
+    console.log(queueMovieIdList);
+  });
 };
