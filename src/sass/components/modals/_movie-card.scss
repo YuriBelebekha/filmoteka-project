@@ -130,10 +130,21 @@
                 border           var(--duration) var(--timing-function);
     
     &:hover,
-    &:focus {
+    &:focus,
+    &.active {
       background-color: var(--color-accent-secondary);
       color: var(--color-white);
       border: none;
+    };
+
+    &:disabled {
+      background-color: transparent;
+      color: lightgrey;
+      border: 1px solid lightgrey;
+    };
+
+    &:disabled:hover {
+      cursor: not-allowed;
     };
 
     @media screen and (min-width: 768px) {

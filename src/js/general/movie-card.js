@@ -5,6 +5,8 @@ import {
   posterHeight,
   posterMissing,
 } from '../services/tmdb-api';
+import { Queue } from '../services/firebase-db-queue';
+import { Watched } from '../services/firebase-db-watched';
 import { refs } from './refs';
 
 let movieId = 0;
@@ -22,13 +24,13 @@ refs.galleryHomeList.addEventListener('click', function (e) {
         };
         
         if (data) {
-          refs.playBtn.classList.remove('is-hidden');
+          refs.playBtn.classList.remove('is-hidden');          
           return createMovieCard(data);          
         };        
       })
       .catch(error => console.log(error))
-      .finally(() => {
-        addMovieIdToQueueList();
+      .finally(() => {        
+        addMovieIdToList();   
       });
   };
 });
@@ -113,17 +115,14 @@ function createMovieCard(data) {
         </div>
 
         <div class="movie-card__btn-box">
-          <button class="movie-card__btn-queue queue-btn" type="button">Add to queue</button>
-          <button class="movie-card__btn-watched watched-btn" type="button">Add to watched</button>
+          <button class="movie-card__btn-queue queue-btn" data-btn='queue' type="button">Add to queue</button>
+          <button class="movie-card__btn-watched watched-btn" data-btn='watched' type="button">Add to watched</button>
         </div>
       </div>
     </div>
   `;
 
-  refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));
-  
-  
-  
+  refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));  
 };
 
 function getMovieGenres(data) {
@@ -136,12 +135,76 @@ function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterM
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
 };
 
-function addMovieIdToQueueList() {
-  const queueBtn = document.querySelector('.queue-btn');
-  const queueMovieIdList = [];
+// Add movieId to queue and watched
+function addMovieIdToList() {
+  const dataBtn = document.querySelectorAll('[data-btn]');
+    
+  dataBtn.forEach(item => {
+    const btnDataName = item.dataset.btn;
+    const dataBtnQueue = document.querySelector('[data-btn="queue"]');
+    const dataBtnWatched = document.querySelector('[data-btn="watched"]');
 
-  queueBtn.addEventListener('click', () => {
-    queueMovieIdList.push(movieId);
-    console.log(queueMovieIdList);
+    item.addEventListener('click', () => {
+      addMovieIdToLocalStorage(movieId, btnDataName);
+
+      if (btnDataName === 'queue') {
+        Queue.create(localStorage.getItem('queue'))
+          .then(() => {
+            dataBtnQueue.classList.add('active');
+            dataBtnQueue.textContent = 'Remove from queue';
+            dataBtnWatched.disabled = true;
+          });
+      };
+      
+      if (btnDataName === 'watched') {
+        Watched.create(localStorage.getItem('watched'))
+          .then(() => {
+            dataBtnWatched.classList.add('active');
+            dataBtnWatched.textContent = 'Remove from watched';
+            dataBtnQueue.disabled = true;
+          });
+      };
+    });
   });
 };
+
+function addMovieIdToLocalStorage(movieId, btnDataName) {
+  const allMovieIdFromLocalStorage = getMovieIdFromLocalStorage(btnDataName);
+
+  if (!JSON.stringify(allMovieIdFromLocalStorage).includes(movieId)) {
+    allMovieIdFromLocalStorage.push(movieId);  
+    localStorage.setItem(`${btnDataName}`, JSON.stringify(allMovieIdFromLocalStorage));
+  };
+};
+
+function getMovieIdFromLocalStorage(btnDataName) {
+  return JSON.parse(localStorage.getItem(`${btnDataName}`) || '[]');
+};
+
+
+
+
+
+
+
+// // Add movieId to queue
+// function addMovieIdToQueueList() {
+//   const queueBtn = document.querySelector('.queue-btn');
+//   console.log(queueBtn.dataset.btn)
+//   queueBtn.addEventListener('click', () => {
+//     addMovieIdToLocalStorage(movieId);
+//   });
+// };
+
+// function addMovieIdToLocalStorage(id) {
+//   const allMovieIdFromLocalStorage = getMovieIdFromLocalStorage();
+
+//   if (!JSON.stringify(allMovieIdFromLocalStorage).includes(id)) {
+//     allMovieIdFromLocalStorage.push(id);  
+//     localStorage.setItem('movieIdQueue', JSON.stringify(allMovieIdFromLocalStorage));
+//   };
+// };
+
+// function getMovieIdFromLocalStorage() {
+//   return JSON.parse(localStorage.getItem('movieIdQueue') || '[]');
+// };

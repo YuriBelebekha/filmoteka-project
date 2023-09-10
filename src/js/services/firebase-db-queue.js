@@ -1,12 +1,6 @@
-// 'https://filmoteka-project-goit-default-rtdb.europe-west1.firebasedatabase.app/'
-
-// stopped here
-// https://www.youtube.com/watch?v=KS2ngnRAKlg 46:15
-// import { refs } from '../general/refs';
-
 export class Queue {
   static async create(queueMovieIdList) {
-    return fetch('https://filmoteka-project-goit-default-rtdb.europe-west1.firebasedatabase.app/', {
+    return fetch('https://filmoteka-project-goit-default-rtdb.europe-west1.firebasedatabase.app/queue.json', {
       method: 'POST',
       body: JSON.stringify(queueMovieIdList),
       headers: {

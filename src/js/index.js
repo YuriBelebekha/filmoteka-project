@@ -9,6 +9,7 @@ import './general/auth';
 
 import './services/tmdb-api';
 import './services/firebase-db-queue';
+import './services/firebase-db-watched';
 
 import './render/gallery-trending-movies';
 import './render/gallery-search-movies';
