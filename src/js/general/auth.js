@@ -1,5 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { refs } from './refs';
+import { Queue } from '../services/firebase-db-queue';
 
 refs.loginForm.addEventListener('submit', loginFormHandler);
 refs.signupForm.addEventListener('submit', signupFormHandler);
@@ -13,6 +14,8 @@ function loginFormHandler(e) {
     .then(token => {
       if (token) {
         Notify.success(`Login successful. Email: ${loginFormEmail}`);
+        
+        return Queue.fetch(token);
       } else {
         Notify.failure('Incorrect login or password');
       };      
