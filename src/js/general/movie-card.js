@@ -5,8 +5,8 @@ import {
   posterHeight,
   posterMissing,
 } from '../services/tmdb-api';
-import { Queue } from '../services/firebase-db-queue';
-import { Watched } from '../services/firebase-db-watched';
+// import { Queue } from '../services/firebase-db-queue';
+// import { Watched } from '../services/firebase-db-watched';
 import { refs } from './refs';
 
 let movieId = 0;
@@ -147,23 +147,35 @@ function addMovieIdToList() {
     item.addEventListener('click', () => {
       addMovieIdToLocalStorage(movieId, btnDataName);
 
-      if (btnDataName === 'queue') {
-        Queue.create(localStorage.getItem('queue'))
-          .then(() => {
-            dataBtnQueue.classList.add('active');
-            dataBtnQueue.textContent = 'Remove from queue';
-            dataBtnWatched.disabled = true;
-          });
+      if (btnDataName === 'queue') {        
+        dataBtnQueue.classList.add('active');
+        dataBtnQueue.textContent = 'Remove from queue';
+        dataBtnWatched.disabled = true;        
       };
       
-      if (btnDataName === 'watched') {
-        Watched.create(localStorage.getItem('watched'))
-          .then(() => {
-            dataBtnWatched.classList.add('active');
-            dataBtnWatched.textContent = 'Remove from watched';
-            dataBtnQueue.disabled = true;
-          });
+      if (btnDataName === 'watched') {        
+        dataBtnWatched.classList.add('active');
+        dataBtnWatched.textContent = 'Remove from watched';
+        dataBtnQueue.disabled = true;
       };
+
+      // if (btnDataName === 'queue') {
+      //   Queue.create({ ids: localStorage.getItem('queue') })
+      //     .then(() => {
+      //       dataBtnQueue.classList.add('active');
+      //       dataBtnQueue.textContent = 'Remove from queue';
+      //       dataBtnWatched.disabled = true;
+      //     });
+      // };
+      
+      // if (btnDataName === 'watched') {
+      //   Watched.create({ ids: localStorage.getItem('watched') })
+      //     .then(() => {
+      //       dataBtnWatched.classList.add('active');
+      //       dataBtnWatched.textContent = 'Remove from watched';
+      //       dataBtnQueue.disabled = true;
+      //     });
+      // };
     });
   });
 };
@@ -181,30 +193,6 @@ function getMovieIdFromLocalStorage(btnDataName) {
   return JSON.parse(localStorage.getItem(`${btnDataName}`) || '[]');
 };
 
-
-
-
-
-
-
-// // Add movieId to queue
-// function addMovieIdToQueueList() {
-//   const queueBtn = document.querySelector('.queue-btn');
-//   console.log(queueBtn.dataset.btn)
-//   queueBtn.addEventListener('click', () => {
-//     addMovieIdToLocalStorage(movieId);
-//   });
-// };
-
-// function addMovieIdToLocalStorage(id) {
-//   const allMovieIdFromLocalStorage = getMovieIdFromLocalStorage();
-
-//   if (!JSON.stringify(allMovieIdFromLocalStorage).includes(id)) {
-//     allMovieIdFromLocalStorage.push(id);  
-//     localStorage.setItem('movieIdQueue', JSON.stringify(allMovieIdFromLocalStorage));
-//   };
-// };
-
-// function getMovieIdFromLocalStorage() {
-//   return JSON.parse(localStorage.getItem('movieIdQueue') || '[]');
+// function removeMovieIdFromLocalStorage(movieId) {
+//   localStorage.removeItem(movieId);
 // };

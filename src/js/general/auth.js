@@ -18,7 +18,7 @@ function loginFormHandler(e) {
         return Queue.fetch(token);
       } else {
         Notify.failure('Incorrect login or password');
-      };      
+      };
     });
   
   refs.loginInput.forEach(item => item.value = '');
@@ -62,7 +62,9 @@ export async function authWithEmailAndPassword(email, password) {
     }
   )
     .then(response => response.json())
-    .then(data => data.idToken);
+    .then(data => {
+      return data.idToken;
+    });
 };
 
 export async function signupWithEmailAndPassword(email, password) {
