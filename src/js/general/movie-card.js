@@ -12,7 +12,7 @@ import { refs } from './refs';
 let movieId = 0;
 
 refs.galleryHomeList.addEventListener('click', function (e) {
-  const clickedElement = e.target.closest('[data-movie-id]');
+  const clickedElement = e.target.closest('[data-movie-id]');  
 
   if (clickedElement !== null) {
     movieId = Number(clickedElement.dataset.movieId);
@@ -24,13 +24,13 @@ refs.galleryHomeList.addEventListener('click', function (e) {
         };
         
         if (data) {
-          refs.playBtn.classList.remove('is-hidden');          
-          return createMovieCard(data);          
+          refs.playBtn.classList.remove('is-hidden');
+          createMovieCard(data);     
         };        
       })
       .catch(error => console.log(error))
       .finally(() => {        
-        addMovieIdToList();   
+        addMovieIdToList(movieId);        
       });
   };
 });
@@ -69,7 +69,7 @@ function createMovieCard(data) {
     movieTitle,
     movieVoteAverage,
     movieVoteCount,
-  } = movieCardDetails;
+  } = movieCardDetails;  
   
   const markup = `
     <div class="movie-card" data-movie-id="${movieId}">
@@ -135,22 +135,36 @@ function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterM
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
 };
 
-// Add movieId to queue and watched
-function addMovieIdToList() {
+// Add/remove movieId to/from queue and watched
+function addMovieIdToList(movieId) {
   const dataBtn = document.querySelectorAll('[data-btn]');
-    
+  const dataBtnQueue = document.querySelector('[data-btn="queue"]');
+  const dataBtnWatched = document.querySelector('[data-btn="watched"]');
+
   dataBtn.forEach(item => {
     const btnDataName = item.dataset.btn;
-    const dataBtnQueue = document.querySelector('[data-btn="queue"]');
-    const dataBtnWatched = document.querySelector('[data-btn="watched"]');
+    // const dataBtnQueue = document.querySelector('[data-btn="queue"]');
+    // const dataBtnWatched = document.querySelector('[data-btn="watched"]');
+    
+    if (getMovieIdFromLocalStorage('queue').includes(movieId)) {
+      dataBtnQueue.classList.add('active');
+      dataBtnQueue.textContent = 'Remove from queue';
+      dataBtnWatched.disabled = true;
+    };
+
+    if (getMovieIdFromLocalStorage('watched').includes(movieId)) {
+      dataBtnWatched.classList.add('active');
+      dataBtnWatched.textContent = 'Remove from watched';
+      dataBtnQueue.disabled = true;
+    };
 
     item.addEventListener('click', () => {
-      addMovieIdToLocalStorage(movieId, btnDataName);
+      addMovieIdToLocalStorage(movieId, btnDataName);      
 
       if (btnDataName === 'queue') {        
         dataBtnQueue.classList.add('active');
         dataBtnQueue.textContent = 'Remove from queue';
-        dataBtnWatched.disabled = true;        
+        dataBtnWatched.disabled = true;
       };
       
       if (btnDataName === 'watched') {        
@@ -158,7 +172,7 @@ function addMovieIdToList() {
         dataBtnWatched.textContent = 'Remove from watched';
         dataBtnQueue.disabled = true;
       };
-
+      
       // if (btnDataName === 'queue') {
       //   Queue.create({ ids: localStorage.getItem('queue') })
       //     .then(() => {
@@ -180,6 +194,34 @@ function addMovieIdToList() {
   });
 };
 
+function removeMovieIdFromList(movieId) {
+  const dataBtn = document.querySelectorAll('[data-btn]');
+  const dataBtnQueue = document.querySelector('[data-btn="queue"]');
+  const dataBtnWatched = document.querySelector('[data-btn="watched"]');
+
+  dataBtn.forEach(item => {
+    const btnDataName = item.dataset.btn;
+
+    item.addEventListener('click', () => {
+      if (btnDataName === 'queue' && dataBtnQueue.textContent === 'Remove from queue') {        
+        dataBtnQueue.classList.remove('active');
+        dataBtnQueue.textContent = 'Add to queue';
+        dataBtnWatched.disabled = false;
+
+        removeMovieIdFromLocalStorage(movieId, btnDataName);
+      };
+
+      if (btnDataName === 'watched' && dataBtnWatched.textContent === 'Remove from watched') {        
+        dataBtnWatched.classList.remove('active');
+        dataBtnWatched.textContent = 'Add to queue';
+        dataBtnQueue.disabled = false;
+
+        removeMovieIdFromLocalStorage(movieId, btnDataName);
+      };
+    });    
+  });  
+};
+
 function addMovieIdToLocalStorage(movieId, btnDataName) {
   const allMovieIdFromLocalStorage = getMovieIdFromLocalStorage(btnDataName);
 
@@ -193,6 +235,13 @@ function getMovieIdFromLocalStorage(btnDataName) {
   return JSON.parse(localStorage.getItem(`${btnDataName}`) || '[]');
 };
 
-// function removeMovieIdFromLocalStorage(movieId) {
-//   localStorage.removeItem(movieId);
-// };
+function removeMovieIdFromLocalStorage(movieId, btnDataName) {
+  const idList = getMovieIdFromLocalStorage(btnDataName);
+  const movieIdIndex = idList.indexOf(movieId);
+
+  if (movieIdIndex !== -1) {
+    idList.splice(movieIdIndex, 1);
+  };
+
+  localStorage.setItem(`${btnDataName}`, JSON.stringify(idList));
+};
