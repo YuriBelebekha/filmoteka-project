@@ -22,9 +22,9 @@ refs.galleryHomeList.addEventListener('click', function (e) {
         };
         
         if (data) {
-          refs.playBtn.classList.remove('is-hidden');
+          refs.playBtn.classList.remove('is-hidden');          
           createMovieCard(data);     
-        };        
+        }; 
       })
       .catch(error => console.log(error))
       .finally(() => {        
@@ -67,7 +67,7 @@ function createMovieCard(data) {
     movieTitle,
     movieVoteAverage,
     movieVoteCount,
-  } = movieCardDetails;  
+  } = movieCardDetails;    
   
   const markup = `
     <div class="movie-card" data-movie-id="${movieId}">
@@ -123,9 +123,9 @@ function createMovieCard(data) {
   refs.modalContainer.forEach(item => item.insertAdjacentHTML('beforeend', markup));  
 };
 
-function getMovieGenres(data) {
+function getMovieGenres(genres) {
   let movieGenres = []
-  data.map(({ name }) => { movieGenres.push(name) });
+  genres.map(({ name }) => { movieGenres.push(name) });
   return movieGenres.join(', ');
 };
 

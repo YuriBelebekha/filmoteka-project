@@ -21,18 +21,25 @@ $('[js-pagination-trending-movies]').pagination({
   showGoButton: true,
 
   callback: function (data, _pagination) {
-    pageNumber = data[0];
-
+    pageNumber = data[0];    
+    
     fetchGetTrending(pageNumber)
       .then(({ results }) => {
         if (!results) {
           return noGalleryTrendingMoviesMarkup();
-        };
-
+        };        
+        
         refs.loaderHomeBox.classList.remove('hidden');
+
         if (results) {
-          clearGalleryHomeList();
-          createGalleryTrendingMovies(results);
+          fetchGenreMovieList()
+            .then(({ genres }) => {
+              saveGenresListToLocalStorage(genres);
+            })
+            .then(() => {
+              clearGalleryHomeList();
+              createGalleryTrendingMovies(results);
+            });          
         };
       })
       .catch(error => console.error(error))
@@ -92,10 +99,7 @@ function createGalleryTrendingMovies(data) {
   refs.galleryHomeList.insertAdjacentHTML('beforeend', markup);
 };
 
-// Fetching and converting genre id to genre name text
-fetchGenreMovieList()
-  .then(({ genres }) => saveGenresListToLocalStorage(genres));
-
+// Converting genre id to genre name text
 function saveGenresListToLocalStorage(data) {
   localStorage.setItem('genres', JSON.stringify(data));
 };
