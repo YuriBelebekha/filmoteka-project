@@ -2,6 +2,7 @@ export const refs = {
   // HOME PAGE
   galleryHome:               document.querySelectorAll('.gallery-home'),
   galleryHomeList:           document.querySelector('.gallery-home__list'),
+  galleryLibraryList:        document.querySelector('.gallery-library__list'),
   loaderHomeBox:             document.querySelector('.loader-box'),
   paginationTrendingMovies:  document.querySelector('.pagination-trending-movies'),
   paginationSearchMovies:    document.querySelector('.pagination-search-movies'),

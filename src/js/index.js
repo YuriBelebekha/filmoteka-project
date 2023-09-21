@@ -1,5 +1,5 @@
 import './general/refs';
-import './general/toast-options';
+// import './general/toast-options';
 import './general/modal';
 import './general/movie-trailer';
 import './general/movie-card';
@@ -10,3 +10,4 @@ import './services/tmdb-api';
 import './render/gallery-trending-movies';
 import './render/gallery-search-movies';
 import './render/header-library';
+import './render/gallery-library-movies';

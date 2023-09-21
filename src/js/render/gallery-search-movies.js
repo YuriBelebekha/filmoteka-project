@@ -10,7 +10,7 @@ import { refs } from '../general/refs';
 
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
-  wrongQuery: 'Nothing similar was found. Try to change your request, or choose something interesting from trending movies on home page.',
+  wrongQuery: 'Nothing similar was found. Try to change your request, or choose something interesting from trending movies on Home page.',
   foundMovies: 'Yeah! We found movies :)',
 };
 const {

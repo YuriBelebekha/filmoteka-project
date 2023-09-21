@@ -5,11 +5,70 @@ import {
   posterHeight,
   posterMissing,
 } from '../services/tmdb-api';
-import { refs } from './refs';
+import 'paginationjs';
+import { refs } from '../general/refs';
 
+refs.libraryPageLink.addEventListener('click', createQueueGallery, { once: true });
+
+function createQueueGallery() {
+  const queueList = JSON.parse(localStorage.getItem('queue'));  
+
+  if (!queueList || queueList.length === 0) {
+    const markup = () => '<p>There is no list of movies to watch.</br> <strong>Choose something interesting from trending movies or use the search on the Home page.</strong></p>';
+    
+    refs.galleryLibraryList.insertAdjacentHTML('beforeend', markup());
+  };
+
+  if (queueList) {
+    queueList.map((id) => {
+      fetchGetMovieDetails(id)
+        .then((data) => {
+          createQueueList(data);
+        });
+    });
+  };
+};
+
+function createQueueList(data) {
+  const { id, genres, title, poster_path, release_date } = data;
+  let genreMovie = [];
+
+  genres.map(({name}) => { genreMovie.push(name) });
+  let normalizedStringGenreMovie = genreMovie.join(', ');
+  
+  let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
+
+  const markup = () => {
+    return `
+      <li class="gallery-library__item" data-movie-id="${id}">
+        <div class="gallery-library__poster-box">
+          <img
+            class="gallery-library__poster"
+            src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
+            alt="${title}"
+            width="${posterWidth}"
+            height="${posterHeight}"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="gallery-library__description">
+          <h2 class="gallery-library__name">${title}</h2>
+          <p class="gallery-library__genre">
+            ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+          </p>
+        </div>
+      </li>
+    `    
+  };
+
+  refs.galleryLibraryList.insertAdjacentHTML('beforeend', markup());
+};
+
+///////////////////////////////////////////////////////
 let movieId = 0;
 
-refs.galleryHomeList.addEventListener('click', function (e) {
+refs.galleryLibraryList.addEventListener('click', function (e) {
   const clickedElement = e.target.closest('[data-movie-id]');  
 
   if (clickedElement !== null) {
@@ -23,12 +82,12 @@ refs.galleryHomeList.addEventListener('click', function (e) {
         
         if (data) {
           refs.playBtn.classList.remove('is-hidden');          
-          createMovieCard(data);     
+          createMovieCard(data);
         }; 
       })
       .catch(error => console.log(error))
       .finally(() => {        
-        addOrRemoveMovieIdToList(movieId);     
+        // addOrRemoveMovieIdToList(movieId);     
       });
   };
 });
@@ -131,90 +190,4 @@ function getMovieGenres(genres) {
 
 function getFullMoviePosterPath(posterPathData, baseApiUrlForPosterData, posterMissingData) {
   return posterPathData ? baseApiUrlForPosterData.concat(posterPathData) : posterMissingData;
-};
-
-// Add/remove movieId to/from queue and watched
-function addOrRemoveMovieIdToList(movieId) {
-  const dataBtn = document.querySelectorAll('[data-btn]');
-  const dataBtnQueue = document.querySelector('[data-btn="queue"]');
-  const dataBtnWatched = document.querySelector('[data-btn="watched"]');
-
-  dataBtn.forEach(item => {
-    const btnDataName = item.dataset.btn;
-    
-    if (getMovieIdFromLocalStorage('queue').includes(movieId)) {
-      dataBtnQueue.classList.add('active');
-      dataBtnQueue.textContent = 'Remove from queue';
-      dataBtnWatched.disabled = true;
-    };
-
-    if (getMovieIdFromLocalStorage('watched').includes(movieId)) {
-      dataBtnWatched.classList.add('active');
-      dataBtnWatched.textContent = 'Remove from watched';
-      dataBtnQueue.disabled = true;
-    };
-
-    item.addEventListener('click', () => {
-      const idList = getMovieIdFromLocalStorage(btnDataName);
-      const movieIdIndex = idList.indexOf(movieId);
-      
-      if (btnDataName === 'queue') {
-        if (movieIdIndex === -1) {
-          addMovieIdToLocalStorage(movieId, btnDataName);
-
-          dataBtnQueue.classList.add('active');
-          dataBtnQueue.textContent = 'Remove from queue';
-          dataBtnWatched.disabled = true;
-        };
-
-        if (movieIdIndex !== -1) {          
-          removeMovieIdFromLocalStorage(movieId, btnDataName);
-
-          dataBtnQueue.classList.remove('active');
-          dataBtnQueue.textContent = 'Add to queue';
-          dataBtnWatched.disabled = false;
-        };
-      };
-      
-      if (btnDataName === 'watched') {
-        if (movieIdIndex === -1) {
-          addMovieIdToLocalStorage(movieId, btnDataName);
-
-          dataBtnWatched.classList.add('active');
-          dataBtnWatched.textContent = 'Remove from watched';
-          dataBtnQueue.disabled = true;
-        };
-
-        if (movieIdIndex !== -1) {          
-          removeMovieIdFromLocalStorage(movieId, btnDataName);
-
-          dataBtnWatched.classList.remove('active');
-          dataBtnWatched.textContent = 'Add to queue';
-          dataBtnQueue.disabled = false;
-        };
-      };     
-    });
-  });
-};
-
-function addMovieIdToLocalStorage(movieId, btnDataName) {
-  const allMovieIdFromLocalStorage = getMovieIdFromLocalStorage(btnDataName);
-
-  if (!JSON.stringify(allMovieIdFromLocalStorage).includes(movieId)) {
-    allMovieIdFromLocalStorage.push(movieId);  
-    localStorage.setItem(`${btnDataName}`, JSON.stringify(allMovieIdFromLocalStorage));
-  };
-};
-
-function getMovieIdFromLocalStorage(btnDataName) {
-  return JSON.parse(localStorage.getItem(`${btnDataName}`) || '[]');
-};
-
-function removeMovieIdFromLocalStorage(movieId, btnDataName) {
-  const idList = getMovieIdFromLocalStorage(btnDataName);
-  const movieIdIndex = idList.indexOf(movieId);
-  
-  idList.splice(movieIdIndex, 1);
-
-  localStorage.setItem(`${btnDataName}`, JSON.stringify(idList));
 };
