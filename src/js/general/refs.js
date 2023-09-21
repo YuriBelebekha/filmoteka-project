@@ -1,8 +1,12 @@
 export const refs = {
   // HOME PAGE
-  galleryHome:               document.querySelectorAll('.gallery-home'),
-  galleryHomeList:           document.querySelector('.gallery-home__list'),
-  galleryLibraryList:        document.querySelector('.gallery-library__list'),
+  gallery:                   document.querySelectorAll('.gallery'),
+  galleryTrending:           document.querySelector('.gallery.trending-movies'),
+  gallerySearch:             document.querySelector('.gallery.search-movies'),
+  galleryList:               document.querySelector('.gallery__list'),
+  galleryTrendingList:       document.querySelector('.gallery__list.gallery__trending-list'),
+  gallerySearchList:         document.querySelector('.gallery__list.gallery__search-list'),
+  galleryQueueList:          document.querySelector('.gallery__list.gallery__queue-list'),
   loaderHomeBox:             document.querySelector('.loader-box'),
   paginationTrendingMovies:  document.querySelector('.pagination-trending-movies'),
   paginationSearchMovies:    document.querySelector('.pagination-search-movies'),
@@ -21,7 +25,7 @@ export const refs = {
   // THEME SWITCHER
   radiosThemeSwitcher: document.getElementsByName('theme'),
 
-  // HEADER LIBRARY
+  // HEADER
   header:          document.querySelector('.header'),
   libraryBtnList:  document.querySelector('.library-btn-list'),
   libraryPageLink: document.querySelector('#library-page-link'),

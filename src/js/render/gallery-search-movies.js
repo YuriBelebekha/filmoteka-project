@@ -10,7 +10,7 @@ import { refs } from '../general/refs';
 
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
-  wrongQuery: 'Nothing similar was found. Try to change your request, or choose something interesting from trending movies on Home page.',
+  wrongQuery: 'Nothing similar was found. Try to change your request or choose something interesting from trending movies on Home page.',
   foundMovies: 'Yeah! We found movies :)',
 };
 const {
@@ -69,14 +69,14 @@ function getFoundMovies() {
 
               if (results.length === 0) {
                 inputFormNotification(wrongQuery);
-                clearGalleryHomeList();
+                clearGalleryList();
                 clearPaginationTrendingMovies();
                 clearPaginationSearchMovies();
                 return;
               };
               
               if (results) {
-                clearGalleryHomeList();
+                clearGalleryList();
                 clearPaginationTrendingMovies();
                 createGallerySearchingMovies(results);
                 return inputFormNotification(foundMovies);
@@ -95,8 +95,9 @@ function getFoundMovies() {
     });  
 };
 
-function clearGalleryHomeList() {
-  refs.galleryHomeList.innerHTML = '';
+function clearGalleryList() {
+  refs.galleryTrendingList.innerHTML = '';
+  refs.gallerySearchList.innerHTML = '';
 };
 
 function clearPaginationTrendingMovies() {
@@ -116,10 +117,10 @@ function createGallerySearchingMovies(data) {
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     return `
-      <li class="gallery-home__item" data-movie-id="${id}">
-        <div class="gallery-home__poster-box">
+      <li class="gallery__item" data-movie-id="${id}">
+        <div class="gallery__poster-box">
           <img
-            class="gallery-home__poster"
+            class="gallery__poster"
             src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
             alt="${title}"
             width="${posterWidth}"
@@ -127,9 +128,9 @@ function createGallerySearchingMovies(data) {
             loading="lazy"
           />
         </div>
-        <div class="gallery-home__description">
-          <h2 class="gallery-home__name">${title}</h2>
-          <p class="gallery-home__genre">
+        <div class="gallery__description">
+          <h2 class="gallery__name">${title}</h2>
+          <p class="gallery__genre">
             ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
           </p>
         </div>
@@ -137,7 +138,7 @@ function createGallerySearchingMovies(data) {
     `
   }).join('');
 
-  refs.galleryHomeList.insertAdjacentHTML('beforeend', markup);
+  refs.gallerySearchList.insertAdjacentHTML('beforeend', markup);
 };
 
 function inputFormNotification(notification) {

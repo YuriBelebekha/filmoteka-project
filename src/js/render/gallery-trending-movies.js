@@ -37,7 +37,7 @@ $('[js-pagination-trending-movies]').pagination({
               saveGenresListToLocalStorage(genres);
             })
             .then(() => {
-              clearGalleryHomeList();
+              clearGalleryList();
               createGalleryTrendingMovies(results);
             });          
         };
@@ -58,12 +58,12 @@ function getArrayPageNumbers() {
   return arrayPageNumbers;
 };
 
-function clearGalleryHomeList() {
-  refs.galleryHomeList.innerHTML = '';
+function clearGalleryList() {
+  refs.galleryList.innerHTML = '';
 };
 
 function noGalleryTrendingMoviesMarkup() {
-  refs.galleryHomeList.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
+  refs.galleryList.innerHTML = '<li>Something went wrong... Please, try again later.</li>';
 };
 
 function createGalleryTrendingMovies(data) {
@@ -75,10 +75,10 @@ function createGalleryTrendingMovies(data) {
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     return `
-      <li class="gallery-home__item" data-movie-id="${id}">
-        <div class="gallery-home__poster-box">
+      <li class="gallery__item" data-movie-id="${id}">
+        <div class="gallery__poster-box">
           <img
-            class="gallery-home__poster"
+            class="gallery__poster"
             src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
             alt="${title}"
             width="${posterWidth}"
@@ -86,9 +86,9 @@ function createGalleryTrendingMovies(data) {
             loading="lazy"
           />
         </div>
-        <div class="gallery-home__description">
-          <h2 class="gallery-home__name">${title}</h2>
-          <p class="gallery-home__genre">
+        <div class="gallery__description">
+          <h2 class="gallery__name">${title}</h2>
+          <p class="gallery__genre">
             ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
           </p>
         </div>
@@ -96,7 +96,7 @@ function createGalleryTrendingMovies(data) {
     `
   }).join('');
 
-  refs.galleryHomeList.insertAdjacentHTML('beforeend', markup);
+  refs.galleryList.insertAdjacentHTML('beforeend', markup);
 };
 
 // Converting genre id to genre name text

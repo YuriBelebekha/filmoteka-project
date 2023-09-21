@@ -1,12 +1,9 @@
-<section class="gallery">
+<section class="gallery-box">
   <div class="container">
-    <div
-      class="gallery-home trending-movies"
-      data-modal-open-path="js-movie-card"
-    >
+    <div class="gallery trending-movies" data-modal-open-path="js-movie-card">
       <h2 class="visually-hidden">Trending movies</h2>
 
-      <ul class="gallery-home__list list"></ul>
+      <ul class="gallery__list gallery__trending-list list"></ul>
 
       <div
         class="pagination pagination-trending-movies"
@@ -14,13 +11,10 @@
       ></div>
     </div>
 
-    <div
-      class="gallery-home search-movies"
-      data-modal-open-path="js-movie-card"
-    >
+    <div class="gallery search-movies" data-modal-open-path="js-movie-card">
       <h2 class="visually-hidden">Search movies</h2>
 
-      <ul class="gallery-home__list list"></ul>
+      <ul class="gallery__list gallery__search-list list"></ul>
 
       <div
         class="pagination pagination-search-movies"
@@ -28,13 +22,10 @@
       ></div>
     </div>
 
-    <div
-      class="gallery-library queue-list"
-      data-modal-open-path="js-movie-card"
-    >
+    <div class="gallery queue-list" data-modal-open-path="js-movie-card">
       <h2 class="visually-hidden">Queue list</h2>
 
-      <ul class="gallery-library__list list"></ul>
+      <ul class="gallery__list gallery__queue-list list"></ul>
 
       <div
         class="pagination pagination-queue-list"
