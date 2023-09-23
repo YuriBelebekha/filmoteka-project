@@ -1,4 +1,5 @@
 import { refs } from './refs';
+import { createQueueGallery, clearGalleryQueueList } from '../render/gallery-library-movies';
 
 refs.closeModalBtn.addEventListener('click', closeModal, { passive: true });
 
@@ -10,25 +11,27 @@ refs.backdrop.addEventListener('click', (e) => {
   };
 }, { passive: true });
 
-refs.galleryList.addEventListener('click', function (e) {  
-  const galleryListClassName = refs.galleryList.className;
-  const emptyArea = e.target.className === galleryListClassName;
-  const clickedElement = e.target.closest('[data-modal-open-path]');
+refs.galleryListAll.forEach((item) => {
+  item.addEventListener('click', function (e) {
+    const galleryListClassName = refs.galleryList.className;
+    const emptyArea = e.target.className === galleryListClassName;
+    const clickedElement = e.target.closest('[data-modal-open-path]');
+    
+    if (emptyArea) {
+      return;
+    };
 
-  if (emptyArea) {
-    return;
-  };
+    if (clickedElement) {
+      let target = clickedElement.dataset.modalOpenPath;
+      let modalContainer = document.querySelector(`[data-modal-open-target="${target}"]`);
 
-  if (clickedElement) {
-    let target = clickedElement.dataset.modalOpenPath;
-    let modalContainer = document.querySelector(`[data-modal-open-target="${target}"]`);
-
-    refs.body.forEach(target => target.classList.add('no-scroll'));
-    modalContainer.classList.add('is-open');
-    refs.modal.classList.remove('is-hidden');
-    return;
-  };
-}, { passive: true });
+      refs.body.forEach(target => target.classList.add('no-scroll'));
+      modalContainer.classList.add('is-open');
+      refs.modal.classList.remove('is-hidden');
+      return;
+    };
+  }, { passive: true })
+});
 
 document.addEventListener('keydown', (e) => {   
   if (e.code === 'Escape') {   
@@ -42,4 +45,9 @@ function closeModal() {
   refs.modal.classList.add('is-hidden');
   refs.modalContainer.forEach(item => item.innerHTML = '');
   refs.playBtn.classList.add('is-hidden');
+
+  if (refs.galleryQueueList.hasChildNodes()) {
+    clearGalleryQueueList();
+    createQueueGallery();
+  };
 };

@@ -10,8 +10,8 @@ import { refs } from '../general/refs';
 
 refs.libraryPageLink.addEventListener('click', createQueueGallery, { once: true });
 
-function createQueueGallery() {
-  const queueList = JSON.parse(localStorage.getItem('queue'));  
+export function createQueueGallery() {
+  const queueList = JSON.parse(localStorage.getItem('queue'));
 
   if (!queueList || queueList.length === 0) {
     const markup = () => '<p>There is no list of movies to watch.</br> <strong>Choose something interesting from trending movies or use the search on the Home page.</strong></p>';
@@ -20,16 +20,16 @@ function createQueueGallery() {
   };
 
   if (queueList) {
-    queueList.map((id) => {
+    queueList.map((id) => {      
       fetchGetMovieDetails(id)
-        .then((data) => {
+        .then((data) => {          
           createQueueList(data);
         });
     });
   };
 };
 
-function createQueueList(data) {
+export function createQueueList(data) {
   const { id, genres, title, poster_path, release_date } = data;
   let genreMovie = [];
 
@@ -37,7 +37,7 @@ function createQueueList(data) {
   let normalizedStringGenreMovie = genreMovie.join(', ');
   
   let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
-
+  
   const markup = () => {
     return `
       <li class="gallery__item" data-movie-id="${id}">
@@ -65,6 +65,6 @@ function createQueueList(data) {
   refs.galleryQueueList.insertAdjacentHTML('beforeend', markup());
 };
 
-function clearGalleryList() {
-  refs.galleryList.innerHTML = '';
+export function clearGalleryQueueList() {  
+  refs.galleryQueueList.innerHTML = '';
 };

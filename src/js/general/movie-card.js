@@ -9,8 +9,8 @@ import { refs } from './refs';
 
 let movieId = 0;
 
-refs.galleryList.addEventListener('click', function (e) {
-  const clickedElement = e.target.closest('[data-movie-id]');  
+refs.galleryListAll.forEach((item) => {item.addEventListener('click', function (e) {
+  const clickedElement = e.target.closest('[data-movie-id]');
 
   if (clickedElement !== null) {
     movieId = Number(clickedElement.dataset.movieId);
@@ -22,16 +22,16 @@ refs.galleryList.addEventListener('click', function (e) {
         };
         
         if (data) {
-          refs.playBtn.classList.remove('is-hidden');          
-          createMovieCard(data);     
-        }; 
+          refs.playBtn.classList.remove('is-hidden');
+          createMovieCard(data);
+        };
       })
       .catch(error => console.log(error))
-      .finally(() => {        
-        addOrRemoveMovieIdToList(movieId);     
+      .finally(() => {
+        addOrRemoveMovieIdToList(movieId);
       });
   };
-});
+})});
 
 function createMovieCard(data) {
   const {

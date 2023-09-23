@@ -4,6 +4,7 @@ export const refs = {
   galleryTrending:           document.querySelector('.gallery.trending-movies'),
   gallerySearch:             document.querySelector('.gallery.search-movies'),
   galleryList:               document.querySelector('.gallery__list'),
+  galleryListAll:            document.querySelectorAll('.gallery__list'),
   galleryTrendingList:       document.querySelector('.gallery__list.gallery__trending-list'),
   gallerySearchList:         document.querySelector('.gallery__list.gallery__search-list'),
   galleryQueueList:          document.querySelector('.gallery__list.gallery__queue-list'),
