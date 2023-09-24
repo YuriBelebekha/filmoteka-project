@@ -6,17 +6,43 @@ fieldset {
 main {
   transition: background-color 2000ms var(--timing-function);
 
+  & .gallery__queue-list > li > p,
+  & .gallery__watched-list > li > p {
+    position: absolute;
+    min-width: 260px;
+    left: 50%;
+    text-align: center;
+    @include font(400, 16px, 22px, 0.08em);
+    transform: translateX(-50%);
+  };
+
+  & .gallery__queue-list > li > p a,
+  & .gallery__watched-list > li > p a {
+    text-decoration: underline;
+    color: var(--color-accent-primary);
+  };
+
   &[data-theme="light"] {
     background-color: var(--bg-color-theme-light);
   };
 
   &[data-theme="dark"] {
-    background-color: var(--bg-color-theme-dark);    
+    background-color: var(--bg-color-theme-dark);
+
+    & .gallery__queue-list > li > p,
+    & .gallery__watched-list > li > p {
+      color: var(--color-white);
+    };
   };
 
   &[data-theme="accent-dark"] {
-    background: var(--bg-color-theme-accent-dark);    
-  };
+    background: var(--bg-color-theme-accent-dark);  
+    
+    & .gallery__queue-list > li > p,
+    & .gallery__watched-list > li > p {
+      color: var(--color-white);
+    };
+  };  
 };
 
 footer {

@@ -23,7 +23,7 @@ export function createQueueGallery() {
   if (!queueList || queueList.length === 0) {
     clearGalleryWatchedList();
 
-    const markup = () => '<li><p>There is no list of movies to watch.</br> <strong>Choose something interesting from trending movies or use the search on the Home page.</strong></p></li>';
+    const markup = () => '<li><p>There is no list</br> of movies to watch.</br> <strong>Choose something interesting from trending movies or use the search on the </br><a class="link" href="./index.html">Home page</a></strong></p></li>';
     
     refs.galleryQueueList.insertAdjacentHTML('beforeend', markup());
   };  
@@ -93,7 +93,7 @@ export function createWatchedGallery() {
   if (!watchedList || watchedList.length === 0) {
     clearGalleryQueueList();
 
-    const markup = () => '<li><p>There is no list of watched movies.</br> <strong>Choose something interesting from trending movies or use the search on the Home page.</strong></p></li>';
+    const markup = () => '<li><p>There is no list</br> of watched movies.</br> <strong>Choose something interesting from trending movies or use the search on the </br><a class="link" href="./index.html">Home page</a></strong></p></li>';
     
     refs.galleryWatchedList.insertAdjacentHTML('beforeend', markup());
   };
