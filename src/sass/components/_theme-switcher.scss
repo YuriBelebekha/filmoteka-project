@@ -11,11 +11,29 @@ main {
   };
 
   &[data-theme="dark"] {
-    background-color: var(--bg-color-theme-dark);
+    background-color: var(--bg-color-theme-dark);    
   };
 
   &[data-theme="accent-dark"] {
     background: var(--bg-color-theme-accent-dark);    
+  };
+};
+
+footer {
+  &[data-theme="dark"] {
+    background-color: var(--color-black);
+
+    & .footer__box {
+      color: var(--color-white);
+    };
+  };
+
+  &[data-theme="accent-dark"] {
+    background-color: var(--color-black);
+
+    & .footer__box {
+      color: var(--color-white);
+    };
   };
 };
 

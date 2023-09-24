@@ -10,6 +10,5 @@ function clickLibraryPage() {
   refs.searchFormNotification.classList.add('visually-hidden');
   refs.galleryTrending.classList.add('visually-hidden');
   refs.gallerySearch.classList.add('visually-hidden');
-  // refs.gallery.forEach(item => item.classList.add('visually-hidden'));
   refs.header.classList.add('header-library');
 };

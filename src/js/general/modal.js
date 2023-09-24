@@ -1,5 +1,10 @@
 import { refs } from './refs';
-import { createQueueGallery, clearGalleryQueueList } from '../render/gallery-library-movies';
+import {
+  createQueueGallery,
+  clearGalleryQueueList,
+  createWatchedGallery,
+  clearGalleryWatchedList,
+} from '../render/gallery-library-movies';
 
 refs.closeModalBtn.addEventListener('click', closeModal, { passive: true });
 
@@ -49,5 +54,10 @@ function closeModal() {
   if (refs.galleryQueueList.hasChildNodes()) {
     clearGalleryQueueList();
     createQueueGallery();
+  };
+
+  if (refs.galleryWatchedList.hasChildNodes()) {
+    clearGalleryWatchedList();
+    createWatchedGallery();
   };
 };

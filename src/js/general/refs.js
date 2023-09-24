@@ -8,6 +8,7 @@ export const refs = {
   galleryTrendingList:       document.querySelector('.gallery__list.gallery__trending-list'),
   gallerySearchList:         document.querySelector('.gallery__list.gallery__search-list'),
   galleryQueueList:          document.querySelector('.gallery__list.gallery__queue-list'),
+  galleryWatchedList:        document.querySelector('.gallery__list.gallery__watched-list'),
   loaderHomeBox:             document.querySelector('.loader-box'),
   paginationTrendingMovies:  document.querySelector('.pagination-trending-movies'),
   paginationSearchMovies:    document.querySelector('.pagination-search-movies'),
@@ -27,8 +28,10 @@ export const refs = {
   radiosThemeSwitcher: document.getElementsByName('theme'),
 
   // HEADER
-  header:          document.querySelector('.header'),
-  libraryBtnList:  document.querySelector('.library-btn-list'),
-  libraryPageLink: document.querySelector('#library-page-link'),
-  homePageLink:    document.querySelector('#home-page-link'),
+  header:           document.querySelector('.header'),
+  libraryBtnList:   document.querySelector('.library-btn-list'),
+  libraryPageLink:  document.querySelector('#library-page-link'),
+  homePageLink:     document.querySelector('#home-page-link'),
+  queueBtnFilter:   document.querySelector('#queue-btn-filter'),
+  watchedBtnFilter: document.querySelector('#watched-btn-filter'),
 };
