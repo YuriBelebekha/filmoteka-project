@@ -19,7 +19,12 @@ refs.backdrop.addEventListener('click', (e) => {
 refs.galleryListAll.forEach((item) => {
   item.addEventListener('click', function (e) {
     const galleryListClassName = refs.galleryList.className;
-    const emptyArea = e.target.className === galleryListClassName;
+    const gallerySearchListClassName = refs.gallerySearchList.className;
+    const emptyArea =
+      e.target.className === galleryListClassName
+        || e.target.className === gallerySearchListClassName
+        || e.target.className === ''
+        || e.target.className === 'link';    
     const clickedElement = e.target.closest('[data-modal-open-path]');
     
     if (emptyArea) {
