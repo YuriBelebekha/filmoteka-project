@@ -57,6 +57,7 @@ function getFoundMovies() {
         pageRange: 1,
         showGoInput: true,
         showGoButton: true,
+        goButtonText: 'Go to page',
 
         callback: function (data, _pagination) {
           pageNumber = data[0];

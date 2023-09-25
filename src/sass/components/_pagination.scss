@@ -122,10 +122,11 @@
 };
 
 .paginationjs-go-button input {
-  width: 40px;
-  height: 25px;
+  width: 90px;
+  height: 30px;
 
   font-weight: 500;
+  text-transform: uppercase;
 
   border: none;
   border-radius: 3px;
@@ -146,7 +147,7 @@
   };
 
   @media screen and (min-width: 768px) {
-    width: 40px;
+    width: 90px;
     height: 40px;    
     margin-left: 10px;
 
