@@ -4,6 +4,7 @@ fieldset {
 };
 
 main {
+  min-height: 260px;
   transition: background-color 2000ms var(--timing-function);
 
   & .gallery__queue-list > li > p,
