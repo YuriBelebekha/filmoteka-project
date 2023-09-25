@@ -189,7 +189,7 @@ function addOrRemoveMovieIdToList(movieId) {
           removeMovieIdFromLocalStorage(movieId, btnDataName);
 
           dataBtnWatched.classList.remove('active');
-          dataBtnWatched.textContent = 'Add to queue';
+          dataBtnWatched.textContent = 'Add to watched';
           dataBtnQueue.disabled = false;
         };
       };     
