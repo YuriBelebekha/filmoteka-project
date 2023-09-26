@@ -7,6 +7,8 @@ import {
 } from '../services/tmdb-api';
 import 'paginationjs';
 import { refs } from '../general/refs';
+import NProgress from 'nprogress';
+NProgress.configure({ showSpinner: false });
 
 refs.libraryPageLink.addEventListener('click', createQueueGallery, { once: true });
 refs.queueBtnFilter.addEventListener('click', createQueueGallery);
@@ -29,11 +31,16 @@ export function createQueueGallery() {
   };  
 
   if (queueList) {
-    queueList.map((id) => {      
+    queueList.map((id) => {
+      NProgress.start();
+
       fetchGetMovieDetails(id)
         .then((data) => {
           clearGalleryWatchedList();
           createQueueList(data);
+        })
+        .finally(() => {
+          NProgress.done();
         });
     });
   };
@@ -99,11 +106,16 @@ export function createWatchedGallery() {
   };
 
   if (watchedList) {
-    watchedList.map((id) => {      
+    watchedList.map((id) => {
+      NProgress.start();
+
       fetchGetMovieDetails(id)
         .then((data) => {
           clearGalleryQueueList();
           createWatchedList(data);
+        })
+        .finally(() => {
+          NProgress.done();
         });
     });
   };

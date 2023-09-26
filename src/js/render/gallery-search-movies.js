@@ -7,6 +7,8 @@ import {
   posterMissing,
 } from '../services/tmdb-api';
 import { refs } from '../general/refs';
+import NProgress from 'nprogress';
+NProgress.configure({ showSpinner: false });
 
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
@@ -39,6 +41,8 @@ function onSearchFormSubmit(e) {
 function getFoundMovies() {
   const page = 1;
   let pageNumber = 0;
+
+  NProgress.start();
 
   fetchSearchMovies(normalizedSearchQuery, page)
     .then(({ total_pages: totalPages }) => {
@@ -86,6 +90,7 @@ function getFoundMovies() {
             .catch(error => console.error(error))
             .finally(() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
+              NProgress.done();
             });
         },
       });

@@ -6,8 +6,10 @@ import {
   posterHeight,
   posterMissing,
 } from '../services/tmdb-api';
-import { refs } from '../general/refs';
 import 'paginationjs';
+import { refs } from '../general/refs';
+import NProgress from 'nprogress';
+NProgress.configure({ showSpinner: false });
 
 let numPages = 500;
 let arrayPageNumbers = [];
@@ -28,8 +30,9 @@ $('[js-pagination-trending-movies]').pagination({
       .then(({ results }) => {
         if (!results) {
           return noGalleryTrendingMoviesMarkup();
-        };        
+        };
         
+        NProgress.start();
         refs.loaderHomeBox.classList.remove('hidden');
 
         if (results) {
@@ -40,6 +43,9 @@ $('[js-pagination-trending-movies]').pagination({
             .then(() => {
               clearGalleryList();
               createGalleryTrendingMovies(results);
+            })
+            .finally(() => {
+              NProgress.done();
             });          
         };
       })

@@ -34,4 +34,7 @@ export const refs = {
   homePageLink:     document.querySelector('#home-page-link'),
   queueBtnFilter:   document.querySelector('#queue-btn-filter'),
   watchedBtnFilter: document.querySelector('#watched-btn-filter'),
+
+  // FOOTER
+  heartbeatConfetti: document.querySelector('.heartbeat'),
 };
