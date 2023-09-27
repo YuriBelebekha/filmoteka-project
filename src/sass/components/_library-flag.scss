@@ -1,0 +1,40 @@
+.library-flag {
+  position: fixed;
+  right: -182px;
+  top: 10px;
+
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+
+  & ul {
+    padding: 0px;
+    transform: translate(0, 0);
+  };
+
+  & ul li b {
+    padding-left: 90px;
+  };
+
+  & ul li:hover b {
+    padding-left: 1px;
+  };
+
+  & ul li {
+    display: block;
+    margin: 5px;
+    background-color: var(--color-accent-secondary);
+    width: 200px;
+    text-align: left;
+    padding: 8px 6px;
+    border-radius: 5px 0 0 5px;
+    transition: all 1s;
+  };
+
+  & ul li:hover {
+    transform: translate(-60px, 0);
+    background-color: var(--color-accent-primary);
+    // color: var(--color-accent-primary);
+  };
+};
