@@ -77,72 +77,14 @@ function createGalleryTrendingMovies(data) {
   const markup = data.map(({ id, genre_ids, title, poster_path, release_date }) => {
     let genreMovie = [];
     genre_ids.map((genre) => { genreMovie.push(getGenreMovie(genre)) });
-    let normalizedStringGenreMovie = genreMovie.join(', ');    
+    let normalizedStringGenreMovie = genreMovie.join(', ');
     
     let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
 
     const queueLocalStorageList = localStorage.getItem('queue');
     const watchedLocalStorageList = localStorage.getItem('watched');
-
-    if (queueLocalStorageList.includes(id)) {
-      return `
-        <li class="gallery__item" data-movie-id="${id}">
-          <div class="gallery__poster-box">
-            <img
-              class="gallery__poster"
-              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-              alt="${title}"
-              width="${posterWidth}"
-              height="${posterHeight}"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="gallery__description">
-            <h2 class="gallery__name">${title}</h2>
-            <p class="gallery__genre">
-              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-            </p>
-          </div>
-
-          <div class="library-flag">
-            <ul>
-              <li><i class="fa-solid fa-q"></i><b>ueue</b></li>
-            </ul>
-          </div>
-        </li>
-      `
-    }
-    else if (watchedLocalStorageList.includes(id)) {
-      return `
-        <li class="gallery__item" data-movie-id="${id}">
-          <div class="gallery__poster-box">
-            <img
-              class="gallery__poster"
-              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-              alt="${title}"
-              width="${posterWidth}"
-              height="${posterHeight}"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="gallery__description">
-            <h2 class="gallery__name">${title}</h2>
-            <p class="gallery__genre">
-              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-            </p>
-          </div>
-
-          <div class="library-flag">
-            <ul>
-              <li><i class="fa-solid fa-w"></i><b>atched</b></li>
-            </ul>
-          </div>
-        </li>
-      `
-    }
-    else {
+    
+    if (!queueLocalStorageList && !watchedLocalStorageList) {
       return `
         <li class="gallery__item" data-movie-id="${id}">
           <div class="gallery__poster-box">
@@ -165,6 +107,88 @@ function createGalleryTrendingMovies(data) {
         </li>
       `
     };
+    
+    if (queueLocalStorageList && queueLocalStorageList.includes(id)) {
+      return `
+        <li class="gallery__item" data-movie-id="${id}">
+          <div class="gallery__poster-box">
+            <img
+              class="gallery__poster"
+              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
+              alt="${title}"
+              width="${posterWidth}"
+              height="${posterHeight}"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="gallery__description">
+            <h2 class="gallery__name">${title}</h2>
+            <p class="gallery__genre">
+              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+            </p>
+          </div>
+
+          <div class="library-flag">
+            <ul>
+              <li><p>Q</p><b>ueue</b></li>
+            </ul>
+          </div>
+        </li>
+      `
+    };
+    
+    if (watchedLocalStorageList && watchedLocalStorageList.includes(id)) {
+      return `
+        <li class="gallery__item" data-movie-id="${id}">
+          <div class="gallery__poster-box">
+            <img
+              class="gallery__poster"
+              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
+              alt="${title}"
+              width="${posterWidth}"
+              height="${posterHeight}"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="gallery__description">
+            <h2 class="gallery__name">${title}</h2>
+            <p class="gallery__genre">
+              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+            </p>
+          </div>
+
+          <div class="library-flag">
+            <ul>
+              <li><p>W</p><b>atched</b></li>
+            </ul>
+          </div>
+        </li>
+      `
+    };
+
+    return `
+      <li class="gallery__item" data-movie-id="${id}">
+        <div class="gallery__poster-box">
+          <img
+            class="gallery__poster"
+            src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
+            alt="${title}"
+            width="${posterWidth}"
+            height="${posterHeight}"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="gallery__description">
+          <h2 class="gallery__name">${title}</h2>
+          <p class="gallery__genre">
+            ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
+          </p>
+        </div>
+      </li>
+    `
   }).join('');
 
   refs.galleryList.insertAdjacentHTML('beforeend', markup);

@@ -3,14 +3,20 @@
   right: -182px;
   top: 10px;
 
-  font-weight: 300;
+  font-weight: 600;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-white);
 
   & ul {
     padding: 0px;
-    transform: translate(0, 0);
+    transform: translate(0, 0);    
+  };
+
+  & ul p {
+    display: inline;
+    font-size: 14px;
   };
 
   & ul li b {
@@ -18,7 +24,7 @@
   };
 
   & ul li:hover b {
-    padding-left: 1px;
+    padding-left: 0;
   };
 
   & ul li {
@@ -35,6 +41,5 @@
   & ul li:hover {
     transform: translate(-60px, 0);
     background-color: var(--color-accent-primary);
-    // color: var(--color-accent-primary);
   };
 };
