@@ -43,6 +43,27 @@ $('[js-pagination-trending-movies]').pagination({
             .then(() => {
               clearGalleryList();
               createGalleryTrendingMovies(results);
+
+              const queueLocalStorageList = localStorage.getItem('queue');
+              const watchedLocalStorageList = localStorage.getItem('watched');
+              
+              results.forEach(({ id }) => {
+                if (queueLocalStorageList.includes(id)) {
+                  createQueueFlagToMovieCard(id);
+                };
+
+                if (watchedLocalStorageList.includes(id)) {
+                  createWatchedFlagToMovieCard(id);                  
+                };
+
+                const libraryFlagAll = document.querySelectorAll('.library-flag');
+
+                if (libraryFlagAll) {
+                  libraryFlagAll.forEach((item) => {
+                    item.addEventListener('click', (e) => { e.stopPropagation() });
+                  });
+                };                  
+              });
             })
             .finally(() => {
               NProgress.done();
@@ -79,94 +100,7 @@ function createGalleryTrendingMovies(data) {
     genre_ids.map((genre) => { genreMovie.push(getGenreMovie(genre)) });
     let normalizedStringGenreMovie = genreMovie.join(', ');
     
-    let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';
-
-    const queueLocalStorageList = localStorage.getItem('queue');
-    const watchedLocalStorageList = localStorage.getItem('watched');
-    
-    if (!queueLocalStorageList && !watchedLocalStorageList) {
-      return `
-        <li class="gallery__item" data-movie-id="${id}">
-          <div class="gallery__poster-box">
-            <img
-              class="gallery__poster"
-              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-              alt="${title}"
-              width="${posterWidth}"
-              height="${posterHeight}"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="gallery__description">
-            <h2 class="gallery__name">${title}</h2>
-            <p class="gallery__genre">
-              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-            </p>
-          </div>
-        </li>
-      `
-    };
-    
-    if (queueLocalStorageList && queueLocalStorageList.includes(id)) {
-      return `
-        <li class="gallery__item" data-movie-id="${id}">
-          <div class="gallery__poster-box">
-            <img
-              class="gallery__poster"
-              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-              alt="${title}"
-              width="${posterWidth}"
-              height="${posterHeight}"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="gallery__description">
-            <h2 class="gallery__name">${title}</h2>
-            <p class="gallery__genre">
-              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-            </p>
-          </div>
-
-          <div class="library-flag">
-            <ul>
-              <li><p>Q</p><b>ueue</b></li>
-            </ul>
-          </div>
-        </li>
-      `
-    };
-    
-    if (watchedLocalStorageList && watchedLocalStorageList.includes(id)) {
-      return `
-        <li class="gallery__item" data-movie-id="${id}">
-          <div class="gallery__poster-box">
-            <img
-              class="gallery__poster"
-              src="${poster_path ? baseApiUrlForPoster.concat(poster_path) : posterMissing}"
-              alt="${title}"
-              width="${posterWidth}"
-              height="${posterHeight}"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="gallery__description">
-            <h2 class="gallery__name">${title}</h2>
-            <p class="gallery__genre">
-              ${normalizedStringGenreMovie.length ? normalizedStringGenreMovie : 'N/A'} | ${releaseYear}
-            </p>
-          </div>
-
-          <div class="library-flag">
-            <ul>
-              <li><p>W</p><b>atched</b></li>
-            </ul>
-          </div>
-        </li>
-      `
-    };
+    let releaseYear = release_date ? release_date.slice(0, 4) : 'N/A';    
 
     return `
       <li class="gallery__item" data-movie-id="${id}">
@@ -192,6 +126,36 @@ function createGalleryTrendingMovies(data) {
   }).join('');
 
   refs.galleryList.insertAdjacentHTML('beforeend', markup);
+};
+
+function createQueueFlagToMovieCard(id) {  
+  const getDataElementWithMovieId = document.querySelector(`[data-movie-id="${id}"]`);
+
+  const markup = 
+    `
+      <div class="library-flag">
+        <ul>
+          <li><p>Q</p><b>ueue</b></li>
+        </ul>
+      </div>
+    `
+  
+  getDataElementWithMovieId.insertAdjacentHTML('beforeend', markup);
+};
+
+function createWatchedFlagToMovieCard(id) {
+  const getDataElementWithMovieId = document.querySelector(`[data-movie-id="${id}"]`);
+
+  const markup = 
+    `
+      <div class="library-flag">
+        <ul>
+          <li><p>W</p><b>atched</b></li>
+        </ul>
+      </div>
+    `
+  
+  getDataElementWithMovieId.insertAdjacentHTML('beforeend', markup);
 };
 
 // Converting genre id to genre name text
