@@ -20,13 +20,17 @@ refs.galleryListAll.forEach((item) => {
   item.addEventListener('click', function (e) {
     const galleryListClassName = refs.galleryList.className;
     const gallerySearchListClassName = refs.gallerySearchList.className;
+    const galleryQueueListClassName = refs.galleryQueueList.className;
+    const galleryWatchedListClassName = refs.galleryWatchedList.className;
     const emptyArea =
       e.target.className === galleryListClassName
         || e.target.className === gallerySearchListClassName
+        || e.target.className === galleryQueueListClassName
+        || e.target.className === galleryWatchedListClassName
         || e.target.className === ''
-        || e.target.className === 'link';    
+        || e.target.className === 'link';
     const clickedElement = e.target.closest('[data-modal-open-path]');
-    
+
     if (emptyArea) {
       return;
     };
