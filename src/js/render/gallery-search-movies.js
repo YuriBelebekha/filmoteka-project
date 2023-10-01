@@ -55,7 +55,7 @@ function getFoundMovies() {
         return arrayPageNumbers;
       };
       
-      $('[js-pagination-search-movies]').pagination({
+      $('[data-pagination-search-movies]').pagination({
         dataSource: getArrayPageNumbers(),
         pageSize: 1,
         pageRange: 1,

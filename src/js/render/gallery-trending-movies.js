@@ -15,7 +15,7 @@ let numPages = 500;
 let arrayPageNumbers = [];
 let pageNumber = 0;
 
-$('[js-pagination-trending-movies]').pagination({
+$('[data-pagination-trending-movies]').pagination({
   dataSource: getArrayPageNumbers(),
   pageSize: 1,
   pageRange: 1,
