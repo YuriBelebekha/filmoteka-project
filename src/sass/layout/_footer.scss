@@ -37,6 +37,7 @@
   };
 
   &__team-link {
+    color: var(--color-grey);
     text-decoration: underline;
     cursor: pointer;
     transition: color var(--duration) var(--timing-function);
