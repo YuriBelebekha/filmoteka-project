@@ -20,7 +20,7 @@ main {
   & .gallery__queue-list > li > p a,
   & .gallery__watched-list > li > p a {
     text-decoration: underline;
-    color: var(--color-accent-primary);
+    color: var(--color-blacks);
   };
 
   &[data-theme="light"] {

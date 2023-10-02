@@ -13,12 +13,10 @@ NProgress.configure({ showSpinner: false });
 const notifications = {
   emptySearchInput: 'Your query is empty, please enter movie name to search.',
   wrongQuery: 'Nothing similar was found. Try to change your request or choose something interesting from trending movies on Home page.',
-  foundMovies: 'Yeah! We found movies :)',
 };
 const {
   emptySearchInput,
   wrongQuery,
-  foundMovies,
 } = notifications;
 
 let normalizedSearchQuery = '';
@@ -84,7 +82,6 @@ function getFoundMovies() {
                 clearGalleryList();
                 clearPaginationTrendingMovies();
                 createGallerySearchingMovies(results);
-                inputFormNotification(foundMovies);
 
                 const queueLocalStorageList = localStorage.getItem('queue');
                 const watchedLocalStorageList = localStorage.getItem('watched');
@@ -117,9 +114,8 @@ function getFoundMovies() {
       });
     })
     .catch(error => {
-      console.error(error);
       inputFormNotification(error);
-    });  
+    });
 };
 
 function clearGalleryList() {
